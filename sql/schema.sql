@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `direct_debit` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `date` datetime DEFAULT NULL,
+  `type` ENUM ('SEPA', 'CFONB') NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=51 ;
 

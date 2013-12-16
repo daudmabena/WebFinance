@@ -110,6 +110,11 @@ while ($invoice = mysql_fetch_assoc($res)) {
 </table>
 <br>
 <form action="process.php" onsubmit="return confirm('Are you sure you want to process the direct debit?')">
+    <select name="type">
+    <option value="SEPA">SEPA</option>
+    <option value="CFONB">CFONB</option>
+    </select>
+
   <input style="width: 150px; height: 40px;" class="bordered" type="submit" name="debit" value="Mark invoices as debited">
 </form>
 
@@ -133,6 +138,7 @@ $res = mysql_query('
   SELECT
     d.id,
     d.date,
+    d.type,
     COUNT(DISTINCT(dr.id)) AS total_invoices,
     ROUND(SUM(ir.qtt*ir.prix_ht), 2) AS HT,
     ROUND(SUM(ir.qtt*ir.prix_ht)*(100+i.tax)/100, 2) AS TTC,
@@ -148,17 +154,30 @@ $res = mysql_query('
 
 while ($debit = mysql_fetch_assoc($res)) {
 	
-  $debit_type = GetDebitTypeInADebit($debit['id']);	
   echo "<tr><td> <a href=\"detail.php?id=$debit[id]\">$debit[date]</a> </td>\n";
   echo "    <td> $debit[total_invoices] </td>\n";
   echo "    <td align=\"right\"> $debit[HT] &euro;</td>\n";
   echo "    <td align=\"right\"> $debit[VAT] &euro; </td>\n";
   echo "    <td align=\"right\"> $debit[TTC] &euro; </td>\n";
-  echo "    <td>"; 
-  if($debit_type['rcur'] > 0) echo "<a href=\"sepa.php?debit_id=$debit[id]&type=RCUR\">SEPA RCUR</a> - ";
-  if($debit_type['frst'] > 0) echo "<a href=\"sepa.php?debit_id=$debit[id]&type=FRST\">SEPA FRST</a> - ";
-  echo "<a href=\"cfonb.php?debit_id=$debit[id]\">CFONB</a> </td>\n";
-  echo "</tr>\n";
+
+  echo "    <td>";
+  switch($debit['type'])
+    {
+      case 'SEPA':
+        $debit_type = GetDebitTypeInADebit($debit['id']);
+        if($debit_type['rcur'] > 0)
+          echo "<a href=\"sepa.php?debit_id=$debit[id]&type=RCUR\">SEPA RCUR</a> ";
+
+        if($debit_type['frst'] > 0)
+          echo " <a href=\"sepa.php?debit_id=$debit[id]&type=FRST\">SEPA FRST</a>\n";
+        break;
+
+      case 'CFONB':
+        echo "<a href=\"cfonb.php?debit_id=$debit[id]\">CFONB</a>\n";
+        break;
+    }
+  echo "</td>\n</tr>\n";
+
 }
 
 echo '</table>';

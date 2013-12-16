@@ -37,13 +37,9 @@ if($res == 0) {
   exit(1);
 }
 
-// Check SEPA format
-if(GenerateSepa() === false)
-  die('Unable to build SEPA file');
-
 // Create new direct debit
 mysql_query('INSERT INTO direct_debit '.
-  'SET date=NOW()')
+  "SET date=NOW(), type = '" . $_GET['type'] . "'")
 or die(mysql_error());
 $id = mysql_insert_id();
 
