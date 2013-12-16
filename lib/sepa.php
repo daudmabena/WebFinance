@@ -198,9 +198,9 @@ function GetDebitType($id_client, $debit_id) {
 		JOIN direct_debit dd ON dd.id = ddr.debit_id
 		JOIN webfinance_invoices i ON i.id_facture = ddr.invoice_id
 		WHERE state='done'
-		AND i.id_client = $id_client
-		AND dd.type = 'SEPA'
-		AND dd.id <= $debit_id
+		  AND i.id_client = $id_client
+		  AND dd.type = 'SEPA'
+		  AND dd.id < $debit_id
 		") or die(mysql_error());
 	return mysql_result($req_debit_type, 0);
 }
