@@ -28,7 +28,7 @@ if(empty($_GET['debit_id']) or !is_numeric($_GET['debit_id']))
 
 $sepa_file = GenerateSepa($_GET['debit_id'], $_GET['type']);
 
-if($sepa_file === false)
+if($sepa_file === FALSE)
   die('Error while building SEPA file');
 
 # Send SEPA file to browser

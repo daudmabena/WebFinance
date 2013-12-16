@@ -25,10 +25,11 @@ must_login();
 $roles = 'manager,employee';
 
 // Check if invoices are planned to be debited
-$req = mysql_query(
-  'SELECT COUNT(*) '.
-  'FROM direct_debit_row '.
-  "WHERE state='todo'")
+$req = mysql_query("
+  SELECT COUNT(*)
+  FROM direct_debit_row
+  WHERE state='todo'
+")
   or die(mysql_error());
 list($res) = mysql_fetch_row($req);
 

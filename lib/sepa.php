@@ -241,7 +241,7 @@ function stripAccents($string){
 	return iconv('utf-8', 'ascii//TRANSLIT', $string);
 	}
 
-	function FormatBancaire ($data, $longueur_donnee, $caractere_defaut = " ", $cadrage_data = "left") {
+function FormatBancaire ($data, $longueur_donnee, $caractere_defaut = " ", $cadrage_data = "left") {
 		// Si le séparateur est vide, on renvoie une erreur pour ne pas faire de boucle infinie
 		if($caractere_defaut == NULL) {
 			return false;
