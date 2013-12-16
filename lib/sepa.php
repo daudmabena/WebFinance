@@ -207,13 +207,15 @@ function GetDebitType($id_client, $debit_id) {
 
 function GetDebitTypeInADebit($debit_id) {
 	
-	$req 		= mysql_query("SELECT id, invoice_id FROM direct_debit_row WHERE debit_id = $debit_id") or die(mysql_error());
+	$req 		= mysql_query("
+SELECT i.id_client
+FROM direct_debit_row ddr
+JOIN webfinance_invoices i ON ddr.invoice_id = i.id_facture
+WHERE debit_id = $debit_id") or die(mysql_error());
 	$res		= array();
-	$Invoice	= new Facture();
 	
 	while ($row = mysql_fetch_assoc($req)) {		
-		$info = $Invoice->getInfos($row['invoice_id']);
-		$type = GetDebitType($info->id_client, $debit_id);
+		$type = GetDebitType($row['id_client'], $debit_id);
 		if($type == 'RCUR') $res['rcur']++;
 		if($type == 'FRST') $res['frst']++;
 	}
