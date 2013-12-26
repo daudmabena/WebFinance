@@ -205,6 +205,13 @@ class Facture extends WFO {
                WHERE f1.id_facture=$id_new_facture
                  AND f2.id_facture=$id");
 
+    // Set VAT to 20% when the original VAT is 19.6%
+    $this->SQL("
+UPDATE webfinance_invoices
+SET tax = 20
+WHERE tax = 19.6
+  AND id_facture = $id_new_facture");
+
     // Duplicate rows from original invoice
     $this->SQL("
 INSERT INTO webfinance_invoice_rows
