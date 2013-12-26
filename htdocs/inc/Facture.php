@@ -211,8 +211,9 @@ INSERT INTO webfinance_invoice_rows
    (id_facture, description, qtt, ordre, prix_ht)
    SELECT $id_new_facture, description, qtt, ordre, prix_ht
    FROM webfinance_invoice_rows
-   WHERE id_facture=$id");
-      return $id_new_facture;
+   WHERE id_facture = $id");
+
+    return $id_new_facture;
   }
 
   function updateTransaction($id_invoice, $type_prev=0){
