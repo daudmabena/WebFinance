@@ -171,22 +171,24 @@ class Facture extends WFO {
 
   function duplicate($id){
 
-    if(is_numeric($id)){
-      $result = $this->SQL("SELECT id_client FROM webfinance_invoices WHERE id_facture=$id");
-      list($id_client) = mysql_fetch_array($result);
-      mysql_free_result($result);
+    if (!is_numeric($id))
+      return 0;
 
-	  $num_facture=$this->generateInvoiceNumber();
+    $result = $this->SQL("SELECT id_client FROM webfinance_invoices WHERE id_facture=$id");
+    list($id_client) = mysql_fetch_array($result);
+    mysql_free_result($result);
 
-	  $query="INSERT INTO webfinance_invoices (id_client,date_created,date_facture,num_facture) ".
-		  "VALUES ($id_client, now(), now(), $num_facture)";
-      $this->SQL($query)
-		  or die(mysql_error());
+    $num_facture=$this->generateInvoiceNumber();
 
-      $id_new_facture = mysql_insert_id();
+    $query="INSERT INTO webfinance_invoices (id_client,date_created,date_facture,num_facture) ".
+      "VALUES ($id_client, now(), now(), $num_facture)";
+    $this->SQL($query)
+      or die(mysql_error());
 
-      // On recopie les données de la facture
-      $this->SQL("UPDATE webfinance_invoices as f1, webfinance_invoices as f2
+    $id_new_facture = mysql_insert_id();
+
+    // On recopie les données de la facture
+    $this->SQL("UPDATE webfinance_invoices as f1, webfinance_invoices as f2
                SET
                  f1.commentaire=f2.commentaire,
                  f1.type_paiement=f2.type_paiement,
@@ -203,11 +205,14 @@ class Facture extends WFO {
                WHERE f1.id_facture=$id_new_facture
                  AND f2.id_facture=$id");
 
-      $this->SQL("INSERT INTO webfinance_invoice_rows (id_facture,description,qtt,ordre,prix_ht) SELECT $id_new_facture,description,qtt,ordre,prix_ht FROM webfinance_invoice_rows WHERE id_facture=$id");
+    // Duplicate rows from original invoice
+    $this->SQL("
+INSERT INTO webfinance_invoice_rows
+   (id_facture, description, qtt, ordre, prix_ht)
+   SELECT $id_new_facture, description, qtt, ordre, prix_ht
+   FROM webfinance_invoice_rows
+   WHERE id_facture=$id");
       return $id_new_facture;
-    }else{
-      return 0;
-    }
   }
 
   function updateTransaction($id_invoice, $type_prev=0){
