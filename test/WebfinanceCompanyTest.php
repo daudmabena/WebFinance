@@ -218,7 +218,7 @@ class WebfinanceCompanyTest extends PHPUnit_Framework_TestCase
 		$invoice = array(
 			'type'                   => 'invoice',
 			'paid'                   => false,
-			'vat'                    => 19.6,
+			'vat'                    => 20.0,
 			'period'                 => 'monthly',
 			'periodic_next_deadline' => '2012-01-04',
 			'delivery'               => 'email',
@@ -294,7 +294,7 @@ class WebfinanceCompanyTest extends PHPUnit_Framework_TestCase
 		$invoice = array(
 			'type'                   => 'invoice',
 			'paid'                   => false,
-			'vat'                    => 19.6,
+			'vat'                    => 20.0,
 			'period'                 => 'monthly',
 			'periodic_next_deadline' => '2012-01-04',
 			'delivery'               => 'email',
@@ -330,7 +330,7 @@ class WebfinanceCompanyTest extends PHPUnit_Framework_TestCase
 		$invoice = array(
 			'type'                   => 'invoice',
 			'paid'                   => false,
-			'vat'                    => 19.6,
+			'vat'                    => 20.0,
 			'period'                 => 'monthly',
 			'periodic_next_deadline' => '2012-01-04',
 			'delivery'               => 'email',
@@ -382,7 +382,7 @@ class WebfinanceCompanyTest extends PHPUnit_Framework_TestCase
 		$invoice = array(
 			'type'           => 'invoice',
 			'paid'           => false,
-			'vat'            => 19.6,
+			'vat'            => 20.0,
 			'period'         => 'none',
 			'delivery'       => 'email',
 			'payment_method' => 'unknown',

@@ -61,7 +61,7 @@ class Subscription(models.Model):
     periodic_next_deadline = models.DateField()
     delivery = models.CharField(max_length=16, choices=[(k, _(k)) for k in ('email', 'postal')], default='email')
     payment_method = models.CharField(max_length=16, choices=[(k, _(k)) for k in ('unknown', 'direct_debit', 'check', 'wire_transfer')], default='unknown')
-    tax = models.DecimalField(max_digits=5, decimal_places=2,default='19.60')
+    tax = models.DecimalField(max_digits=5, decimal_places=2,default='20.00')
     type_doc = models.CharField(max_length=16, choices=[(k, _(k)) for k in ('quote','invoice')], default='invoice') 
     
     class Meta:
@@ -101,7 +101,7 @@ class Invoices(models.Model):
     periodic_next_deadline = models.DateField(null=True, blank=True) #FIXME: remove me
     delivery = models.CharField(max_length=18, blank=True, default='email') #FIXME: remove me
     payment_method = models.CharField(max_length=39, blank=True, default='unknown') #FIXME: remove me
-    tax = models.DecimalField(default='19.60', max_digits=7, decimal_places=2)
+    tax = models.DecimalField(default='20.00', max_digits=7, decimal_places=2)
     exchange_rate = models.DecimalField(default='1.00', max_digits=10, decimal_places=2)
 
 

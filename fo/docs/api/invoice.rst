@@ -263,7 +263,7 @@ To get the invoice schema::
         },
         "tax": {
             "blank": false,
-            "default": "19.60",
+            "default": "20.00",
             "help_text": "Fixed precision numeric data. Ex: 26.73",
             "nullable": false,
             "readonly": false,
@@ -358,7 +358,7 @@ To get the list of invoices associated with the current user::
             "sent": 1,
             "service_type": 5,
             "sub_invoice": "",
-            "tax": "19.60",
+            "tax": "20.00",
             "transactions": [],
             "type_doc": "facture"
         },
@@ -406,7 +406,7 @@ To get the list of invoices associated with the current user::
             "sent": null,
             "service_type": null,
             "sub_invoice": "",
-            "tax": "19.60",
+            "tax": "20.00",
             "transactions": [
                 {
                     "date": null,
@@ -489,7 +489,7 @@ To get the invoice who's resource_uri is /api/v1/invoice/70/::
     "sent": null,
     "service_type": null,
     "sub_invoice": "",
-    "tax": "19.60",
+    "tax": "20.00",
     "transactions": [],
     "type_doc": "devis"
   }
@@ -592,7 +592,7 @@ To update the invoice just send the data to the resource_uri::
     "sent": null,
     "service_type": null,
     "sub_invoice": "",
-    "tax": "19.60",
+    "tax": "20.00",
     "transactions": [],
     "type_doc": "facture"
   }

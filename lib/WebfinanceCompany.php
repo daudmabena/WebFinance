@@ -233,7 +233,7 @@ class WebfinanceCompany {
 	 * array(
 	 *    'type'                   => 'invoice', // or 'quotation'
 	 *    'paid'                   => false, // or true
-	 *    'vat'                    => 19.6,  // %
+	 *    'vat'                    => 20.0,  // %
 	 *    'period'                 => 'none', // 'monthly', 'quarterly', 'yearly'
 	 *    'periodic_next_deadline' => 2012-01-04, // YYYY-MM-DD
 	 *    'delivery'               => 'email', // or 'postal'
@@ -336,7 +336,7 @@ class WebfinanceCompany {
 	 *    'id'                     => 4, // the invoice ID
 	 *    'type'                   => 'invoice', // or 'quotation'
 	 *    'paid'                   => false, // or true
-	 *    'vat'                    => 19.6,  // %
+	 *    'vat'                    => 20.0,  // %
 	 *    'period'                 => 'none', // 'monthly', 'quarterly', 'yearly'
 	 *    'periodic_next_deadline' => 2012-01-04, // YYYY-MM-DD
 	 *    'delivery'               => 'email', // or 'postal'

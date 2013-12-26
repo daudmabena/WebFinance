@@ -51,7 +51,7 @@ class HiPayTest(TestCase):
 
     def test_taxes(self):
         mta = hipay.Tax('tax')
-        mestax=[dict(taxName='TVA 19.6', taxVal='19.6', percentage='true'), dict(taxName='TVA 5.5', taxVal='5.5', percentage='true')]
+        mestax=[dict(taxName='TVA 20.0', taxVal='20.0', percentage='true'), dict(taxName='TVA 5.5', taxVal='5.5', percentage='true')]
         mta.setTaxes(mestax)
         self.assertEqual(hashlib.sha224(ET.tostring(mta.asTree().getroot())).hexdigest(),
                          '7dab36f4b0338e2511f7778b82d5963d2b24829ae3c67e8f3a909709')
@@ -64,7 +64,7 @@ class HiPayTest(TestCase):
         taxes = dict()
         for root in 'shippingTax', 'insuranceTax', 'fixedCostTax':
             taxes[root] = hipay.Tax(root)
-            mestax=[dict(taxName='TVA', taxVal='19.6', percentage='true')]
+            mestax=[dict(taxName='TVA', taxVal='20.0', percentage='true')]
             taxes[root].setTaxes(mestax)
             self.assertEqual(hashlib.sha224(ET.tostring(taxes[root].asTree().getroot())).hexdigest(),
                              checksums[root])
@@ -80,7 +80,7 @@ class HiPayTest(TestCase):
     def test_products(self):
         pr = hipay.Product()
         mta = hipay.Tax('tax')
-        mestax=[dict(taxName='TVA 19.6', taxVal='19.6', percentage='true'), dict(taxName='TVA 5.5', taxVal='5.5', percentage='true')]
+        mestax=[dict(taxName='TVA 20.0', taxVal='20.0', percentage='true'), dict(taxName='TVA 5.5', taxVal='5.5', percentage='true')]
         mta.setTaxes(mestax)
         
         products = [{'name':'The Fall of  Hyperion','info':u'Simmons, Dan – ISBN 0575076380', 'quantity':'10', 'ref':'10', 'category':'91', 'price':'120', 'tax':mta},
@@ -93,7 +93,7 @@ class HiPayTest(TestCase):
     def test_installement(self):
         inst = hipay.Installement()
         mta = hipay.Tax('tax')
-        mestax=[dict(taxName='TVA 19.6', taxVal='19.6', percentage='true'), dict(taxName='TVA 5.5', taxVal='5.5', percentage='true')]
+        mestax=[dict(taxName='TVA 20.0', taxVal='20.0', percentage='true'), dict(taxName='TVA 5.5', taxVal='5.5', percentage='true')]
         mta.setTaxes(mestax)        
         data = [{'price':100, 'first':'true','paymentDelay':'1D', 'tax':mta},{'price':100, 'first':'false','paymentDelay':'1M', 'tax':mta}]
         inst.setInstallements(data)
@@ -109,7 +109,7 @@ class HiPayTest(TestCase):
         taxes = dict()
         for root in 'shippingTax', 'insuranceTax', 'fixedCostTax':
             taxes[root] = hipay.Tax(root)
-            mestax=[dict(taxName='TVA', taxVal='19.6', percentage='true')]
+            mestax=[dict(taxName='TVA', taxVal='20.0', percentage='true')]
             taxes[root].setTaxes(mestax)
         
         data = [{'shippingAmount':1.50, 'insuranceAmount':2.00, 'fixedCostAmount':2.25, 'fixedCostTax':taxes['fixedCostTax'], 'insuranceTax': taxes['insuranceTax'], 'shippingTax':taxes['shippingTax'], 'orderTitle':'Mon ordre', 'orderInfo':'Box', 'orderCategory':91, 'affiliate':af}]
@@ -137,7 +137,7 @@ class HiPayTest(TestCase):
         s.setLogoURL("http://example.org/hipay/shop/logo")        
         pr = hipay.Product()
         mta = hipay.Tax('tax')
-        mestax=[dict(taxName='TVA 19.6', taxVal='19.6', percentage='true'), dict(taxName='TVA 5.5', taxVal='5.5', percentage='true')]
+        mestax=[dict(taxName='TVA 20.0', taxVal='20.0', percentage='true'), dict(taxName='TVA 5.5', taxVal='5.5', percentage='true')]
         mta.setTaxes(mestax)
         
         products = [{'name':'The Fall of  Hyperion','info':u'Simmons, Dan – ISBN 0575076380', 'quantity':'10', 'ref':'10', 'category':'91', 'price':'120', 'tax':mta},
@@ -151,7 +151,7 @@ class HiPayTest(TestCase):
         taxes = dict()
         for root in 'shippingTax', 'insuranceTax', 'fixedCostTax':
             taxes[root] = hipay.Tax(root)
-            mestax=[dict(taxName='TVA', taxVal='19.6', percentage='true')]
+            mestax=[dict(taxName='TVA', taxVal='20.0', percentage='true')]
             taxes[root].setTaxes(mestax)
         
         data = [{'shippingAmount':1.50, 'insuranceAmount':2.00, 'fixedCostAmount':2.25, 'fixedCostTax':taxes['fixedCostTax'], 'insuranceTax': taxes['insuranceTax'], 'shippingTax':taxes['shippingTax'], 'orderTitle':'Mon ordre', 'orderInfo':'Box', 'orderCategory':91, 'affiliate':af}]
@@ -185,7 +185,7 @@ class HiPayTest(TestCase):
         s.setLogoURL("http://example.org/hipay/shop/logo")        
         pr = hipay.Product()
         mta = hipay.Tax('tax')
-        mestax=[dict(taxName='TVA 19.6', taxVal='19.6', percentage='true'), dict(taxName='TVA 5.5', taxVal='5.5', percentage='true')]
+        mestax=[dict(taxName='TVA 20.0', taxVal='20.0', percentage='true'), dict(taxName='TVA 5.5', taxVal='5.5', percentage='true')]
         mta.setTaxes(mestax)
         
         products = [{'name':'The Fall of  Hyperion','info':u'Simmons, Dan – ISBN 0575076380', 'quantity':'10', 'ref':'10', 'category':'91', 'price':'120', 'tax':mta},
@@ -199,7 +199,7 @@ class HiPayTest(TestCase):
         taxes = dict()
         for root in 'shippingTax', 'insuranceTax', 'fixedCostTax':
             taxes[root] = hipay.Tax(root)
-            mestax=[dict(taxName='TVA', taxVal='19.6', percentage='true')]
+            mestax=[dict(taxName='TVA', taxVal='20.0', percentage='true')]
             taxes[root].setTaxes(mestax)
         
         data = [{'shippingAmount':1.50, 'insuranceAmount':2.00, 'fixedCostAmount':2.25, 'fixedCostTax':taxes['fixedCostTax'], 'insuranceTax': taxes['insuranceTax'], 'shippingTax':taxes['shippingTax'], 'orderTitle':'Mon ordre', 'orderInfo':'Box', 'orderCategory':91}]
@@ -235,7 +235,7 @@ class HiPayTest(TestCase):
         s.setLogoURL("http://example.org/hipay/shop/logo")        
         pr = hipay.Product()
         mta = hipay.Tax('tax')
-        mestax=[dict(taxName='TVA 19.6', taxVal='19.6', percentage='true'), dict(taxName='TVA 5.5', taxVal='5.5', percentage='true')]
+        mestax=[dict(taxName='TVA 20.0', taxVal='20.0', percentage='true'), dict(taxName='TVA 5.5', taxVal='5.5', percentage='true')]
         mta.setTaxes(mestax)
         
         products = [{'name':'The Fall of  Hyperion','info':u'Simmons, Dan – ISBN 0575076380', 'quantity':'10', 'ref':'10', 'category':'91', 'price':'120', 'tax':mta},
@@ -249,7 +249,7 @@ class HiPayTest(TestCase):
         taxes = dict()
         for root in 'shippingTax', 'insuranceTax', 'fixedCostTax':
             taxes[root] = hipay.Tax(root)
-            mestax=[dict(taxName='TVA', taxVal='19.6', percentage='true')]
+            mestax=[dict(taxName='TVA', taxVal='20.0', percentage='true')]
             taxes[root].setTaxes(mestax)
         
         order_data = [{'shippingAmount':1.50, 'insuranceAmount':2.00, 'fixedCostAmount':2.25, 'fixedCostTax':taxes['fixedCostTax'], 'insuranceTax': taxes['insuranceTax'], 'shippingTax':taxes['shippingTax'], 'orderTitle':'Mon ordre 2', 'orderInfo':'Box 2', 'orderCategory':91, 'affiliate':af}, {'shippingAmount':1.50, 'insuranceAmount':2.00, 'fixedCostAmount':2.25, 'fixedCostTax':taxes['fixedCostTax'], 'insuranceTax': taxes['insuranceTax'], 'shippingTax':taxes['shippingTax'], 'orderTitle':'Mon ordre', 'orderInfo':'Box', 'orderCategory':91, 'affiliate':af}]
@@ -257,7 +257,7 @@ class HiPayTest(TestCase):
 
         inst = hipay.Installement()
         mta = hipay.Tax('tax')
-        mestax=[dict(taxName='TVA 19.6', taxVal='19.6', percentage='true'), dict(taxName='TVA 5.5', taxVal='5.5', percentage='true')]
+        mestax=[dict(taxName='TVA 20.0', taxVal='20.0', percentage='true'), dict(taxName='TVA 5.5', taxVal='5.5', percentage='true')]
         mta.setTaxes(mestax)        
         inst_data = [{'price':100, 'first':'true','paymentDelay':'1D', 'tax':mta},{'price':100, 'first':'false','paymentDelay':'1M', 'tax':mta}]
         inst.setInstallements(inst_data)
@@ -291,7 +291,7 @@ class HiPayTest(TestCase):
         s.setLogoURL("http://example.org/hipay/shop/logo")        
         pr = hipay.Product()
         mta = hipay.Tax('tax')
-        mestax=[dict(taxName='TVA 19.6', taxVal='19.6', percentage='true'), dict(taxName='TVA 5.5', taxVal='5.5', percentage='true')]
+        mestax=[dict(taxName='TVA 20.0', taxVal='20.0', percentage='true'), dict(taxName='TVA 5.5', taxVal='5.5', percentage='true')]
         mta.setTaxes(mestax)
         
         products = [{'name':'The Fall of  Hyperion','info':u'Simmons, Dan – ISBN 0575076380', 'quantity':'10', 'ref':'10', 'category':'91', 'price':'120', 'tax':mta},
@@ -305,7 +305,7 @@ class HiPayTest(TestCase):
         taxes = dict()
         for root in 'shippingTax', 'insuranceTax', 'fixedCostTax':
             taxes[root] = hipay.Tax(root)
-            mestax=[dict(taxName='TVA', taxVal='19.6', percentage='true')]
+            mestax=[dict(taxName='TVA', taxVal='20.0', percentage='true')]
             taxes[root].setTaxes(mestax)
         
         order_data = [{'shippingAmount':1.50, 'insuranceAmount':2.00, 'fixedCostAmount':2.25, 'fixedCostTax':taxes['fixedCostTax'], 'insuranceTax': taxes['insuranceTax'], 'shippingTax':taxes['shippingTax'], 'orderTitle':'Mon ordre 2', 'orderInfo':'Box 2', 'orderCategory':91}, {'shippingAmount':1.50, 'insuranceAmount':2.00, 'fixedCostAmount':2.25, 'fixedCostTax':taxes['fixedCostTax'], 'insuranceTax': taxes['insuranceTax'], 'shippingTax':taxes['shippingTax'], 'orderTitle':'Mon ordre', 'orderInfo':'Box', 'orderCategory':91}]
@@ -313,7 +313,7 @@ class HiPayTest(TestCase):
 
         inst = hipay.Installement()
         mta = hipay.Tax('tax')
-        mestax=[dict(taxName='TVA 19.6', taxVal='19.6', percentage='true'), dict(taxName='TVA 5.5', taxVal='5.5', percentage='true')]
+        mestax=[dict(taxName='TVA 20.0', taxVal='20.0', percentage='true'), dict(taxName='TVA 5.5', taxVal='5.5', percentage='true')]
         mta.setTaxes(mestax)        
         inst_data = [{'price':100, 'first':'true','paymentDelay':'1D', 'tax':mta},{'price':100, 'first':'false','paymentDelay':'1M', 'tax':mta}]
         inst.setInstallements(inst_data)

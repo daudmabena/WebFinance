@@ -107,7 +107,7 @@ To get the subscription schema::
         },
         "tax": {
             "blank": false,
-            "default": "19.60",
+            "default": "20.00",
             "help_text": "Fixed precision numeric data. Ex: 26.73",
             "nullable": false,
             "readonly": false,
@@ -178,7 +178,7 @@ To get the list of subscriptions associated with the current user::
                     "subscription": "/api/v1/subscription/1/"
                 }
             ],
-            "tax": "19.60",
+            "tax": "20.00",
             "transactions": [
                 {
                     "date": "2011-12-10",
@@ -284,7 +284,7 @@ To get the subscription who's resource_uri is /api/v1/invoice/1/::
             "subscription": "/api/v1/subscription/1/"
         }
     ],
-    "tax": "19.60",
+    "tax": "20.00",
     "transactions": [
         {
             "date": "2011-12-10",
@@ -426,7 +426,7 @@ To update a subscription just send the data to the resource_uri::
             "subscription": "/api/v1/subscription/2/"
         }
     ],
-    "tax": "19.60",
+    "tax": "20.00",
     "transactions": [],
     "type_doc": "invoice"
   }

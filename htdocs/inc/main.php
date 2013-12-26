@@ -224,8 +224,9 @@ function getTVA(){
   $result = mysql_query("SELECT value FROM webfinance_pref WHERE type_pref='taxe_TVA' OR type_pref='taxe_tva' ");
   list($tva) = mysql_fetch_array($result);
   if(!is_numeric($tva))
-    $tva=19.6;
-  $tva = preg_replace("/,/", ".", $tva); // 19,6 fails to insert as 19.6
+    $tva=20.0;
+  // Replace commas with dots to work-around stupid locales
+  $tva = preg_replace("/,/", ".", $tva);
   return $tva;
 }
 

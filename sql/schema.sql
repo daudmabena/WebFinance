@@ -232,7 +232,7 @@ CREATE TABLE IF NOT EXISTS `webfinance_invoices` (
   `is_envoye` tinyint(4) DEFAULT '0',
   `period` enum('none','monthly','quarterly','yearly') DEFAULT 'none',
   `periodic_next_deadline` date DEFAULT NULL,
-  `tax` decimal(4,2) NOT NULL DEFAULT '19.60',
+  `tax` decimal(4,2) NOT NULL DEFAULT '20.00',
   `exchange_rate` decimal(8,2) NOT NULL DEFAULT '1.00',
   `delivery` enum('email','postal') DEFAULT 'email',
   `payment_method` enum('unknown','direct_debit','check','wire_transfer','paypal') DEFAULT NULL,
