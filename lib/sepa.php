@@ -223,7 +223,7 @@ WHERE debit_id = $debit_id") or die(mysql_error());
 }
 
 function GetMandateDate($id_client) {
-	$req_mandat_date = mysql_query("SELECT DATE_FORMAT(dd.date, '%Y-%c-%d') 
+	$req_mandat_date = mysql_query("SELECT DATE_FORMAT(dd.date, '%Y-%m-%d') 
 		FROM direct_debit_row ddr
 		JOIN direct_debit dd ON dd.id = ddr.debit_id
 		JOIN webfinance_invoices i ON i.id_facture = ddr.invoice_id
