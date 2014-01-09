@@ -22,7 +22,7 @@ usage() {
     echo "Usage: $0" >&2
     echo "--template-file=TEMPLATE_FILE" >&2
     echo "--output=OUTPUT_FILE" >&2
-    echo "--company=COMPANY" >&2
+    echo "--company_name=COMPANY_NAME" >&2
     echo "--business_entity=BUSINESS_ENTITY" >&2
     echo "--contract_signer_role=SIGNER_ROLE" >&2
     echo "--contract_signer=SIGNER" >&2
@@ -34,8 +34,8 @@ usage() {
 # ":" means required
 # "::" means optional
 TEMP=$(getopt -o h: --long template-file:,output:,business_entity:,rcs: \
-    --long=company:,contract_signer_role:,contract_signer:,capital:,address: \
     --long=date: -n "$0" -- "$@")
+    --long=company_name:,contract_signer_role:,contract_signer:,capital:,address: \
 
 # Check for non-GNU getopt
 if [ $? != 0 ]
@@ -59,8 +59,8 @@ do
 	    shift 2
 	    ;;
 
-	--company)
-	    company="$2"
+	--company_name)
+	    company_name="$2"
 	    shift 2
 	    ;;
 
@@ -111,7 +111,7 @@ do
     esac
 done
 
-if [ -z "$template_file" -o -z "$output" -o -z "$company" -o -z "$rcs" \
+if [ -z "$template_file" -o -z "$output" -o -z "$company_name" -o -z "$rcs" \
     -o -z "$business_entity" -o -z "$contract_signer_role" -o \
     -z "$contract_signer" -o -z "$capital" -o -z "$address" -o -z "$date" ]
 then
@@ -129,7 +129,7 @@ export LANG='en_US.UTF-8'
 cd $(dirname $0)
 
 sed \
-    -e "s/_COMPANY_/$company/g" \
+    -e "s/_COMPANY_NAME_/$company_name/g" \
     -e "s/_BUSINESS_ENTITY_/$business_entity/g" \
     -e "s/_RCS_/$rcs/g" \
     -e "s/_CONTRACT_SIGNER_ROLE_/$contract_signer_role/g" \
