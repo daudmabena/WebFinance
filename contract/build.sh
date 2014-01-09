@@ -29,13 +29,14 @@ usage() {
     echo "--capital=CAPITAL" >&2
     echo "--date=DATE" >&2
     echo "--address=ADDRESS" >&2
+    echo "--company_id=COMPANY_ID" >&2
 }
 
 # ":" means required
 # "::" means optional
 TEMP=$(getopt -o h: --long template-file:,output:,business_entity:,rcs: \
-    --long=date: -n "$0" -- "$@")
     --long=company_name:,contract_signer_role:,contract_signer:,capital:,address: \
+    --long=date:,company_id: -n "$0" -- "$@")
 
 # Check for non-GNU getopt
 if [ $? != 0 ]
@@ -99,6 +100,11 @@ do
 	    shift 2
 	    ;;
 
+	--company_id)
+	    company_id="$2"
+	    shift 2
+	    ;;
+
 	--)
 	    shift
 	    break
@@ -113,7 +119,8 @@ done
 
 if [ -z "$template_file" -o -z "$output" -o -z "$company_name" -o -z "$rcs" \
     -o -z "$business_entity" -o -z "$contract_signer_role" -o \
-    -z "$contract_signer" -o -z "$capital" -o -z "$address" -o -z "$date" ]
+    -z "$contract_signer" -o -z "$capital" -o -z "$address" -o -z "$date" \
+    -o -z "$company_id" ]
 then
     usage
     exit 1
@@ -136,6 +143,7 @@ sed \
     -e "s/_CONTRACT_SIGNER_/$contract_signer/g" \
     -e "s/_CAPITAL_/$capital/g" \
     -e "s/_ADDRESS_/$address/g" \
+    -e "s/_COMPANY_ID_/$company_id/g" \
     -e "s|_DATE_|$date|g" \
     $template_file \
     | pandoc -V lang=french -V geometry:a4paper --template=contract.latex \

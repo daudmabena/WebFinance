@@ -87,6 +87,7 @@ $stdout = shell_exec("$template_dir/build.sh " .
           "--address=\"$address\" ".
           "--rcs=\"$company->rcs\" ".
           "--date=\"$date\" ".
+          "--company_id=\"$_POST[company_id]\" ".
           " 2>&1");
 
 if(!empty($stdout))
