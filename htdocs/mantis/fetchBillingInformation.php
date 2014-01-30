@@ -98,6 +98,12 @@ for($i=2040; $i>=2009; $i--) {
 	  "Support professionnel hors périmètre de contrat\nPériode: %B %Y",
 	  mktime(0, 0, 0, $month, 1, $year));
 
+	# Ugly hack to avoid some clients to be invoiced for support
+	$clients_not_invoiced = array(
+          552 => TRUE,
+          676 => TRUE,
+        );
+
 	// Print preview
 	foreach($mantis->fetchBillingInformation($year, $month)
           as $webfinance_id => $billing) {
@@ -186,9 +192,15 @@ for($i=2040; $i>=2009; $i--) {
                   "<td align=\"right\"><b>TOTAL <a href=\"$url_webfinance&onglet=billing\">$client_name</a> </b></td> ".
                   "<td align=\"right\">  </td>\n" .
                   "<td align=\"right\"><b>$total_time_client_human_readable</b></td> ".
-                  "<td align=\"right\"><b>$total_price_client&euro;</b></td>\n" .
-                  "<td></td>\n" .
-                  "<td align=\"right\"><a href=\"report.php?id_client=$ticket[id_client]&year=$year&month=$month\">Rapport</a> <b>";
+                  "<td align=\"right\"><b>$total_price_client&euro;</b></td>\n";
+
+
+                if(isset($clients_not_invoiced[$ticket['id_client']]))
+                  echo "<td bgcolor=\"red\">NOT INVOICED</td>\n";
+                else
+                  echo "<td></td>\n";
+
+                echo "<td align=\"right\"><a href=\"report.php?id_client=$ticket[id_client]&year=$year&month=$month\">Rapport</a> <b>";
 
                 if(isset($_POST['action']) && $_POST['action'] == 'send')
                 {
@@ -196,8 +208,8 @@ for($i=2040; $i>=2009; $i--) {
                   $mantis->sendReportByEmail($year, $month, $webfinance_id)
                     or die("Unable to send report for client ID $webfinance_id");
 
-                  # Temp hack for 'Bayard Presse'
-                  if($ticket['id_client'] == 552)
+                  // Skip invoice if client is in $clients_not_invoiced
+                  if(isset($clients_not_invoiced[$ticket['id_client']]))
                     {
                       echo "</b></td></tr>\n";
                       continue;
