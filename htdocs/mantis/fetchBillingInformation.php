@@ -184,10 +184,6 @@ for($i=2040; $i>=2009; $i--) {
                                                     floor($total_minutes_client / 60),
                                                     $total_minutes_client % 60);
 
-                $total_minutes_all_clients += $total_minutes_client;
-
-                $total_price_all_clients += $total_price_client;
-
 		echo "<tr bgcolor=\"lightblue\">" .
                   "<td colspan=\"2\"></td>" .
                   "<td align=\"right\"><b>TOTAL <a href=\"$url_webfinance&onglet=billing\">$client_name</a> </b></td> ".
@@ -197,9 +193,17 @@ for($i=2040; $i>=2009; $i--) {
 
 
                 if(isset($clients_not_invoiced[$ticket['id_client']]))
+                {
                   echo "<td bgcolor=\"red\">NOT INVOICED</td>\n";
+                  $total_minutes_all_clients_not_invoiced += $total_minutes_client;
+                  $total_price_all_clients_not_invoiced += $total_price_client;
+                }
                 else
+                {
+                  $total_minutes_all_clients += $total_minutes_client;
+                  $total_price_all_clients += $total_price_client;
                   echo "<td></td>\n";
+                }
 
                 echo "<td align=\"right\"><a href=\"report.php?id_client=$ticket[id_client]&year=$year&month=$month\">Rapport</a> <b>";
 
@@ -226,17 +230,27 @@ for($i=2040; $i>=2009; $i--) {
                 }
 		echo "</b></td></tr>\n";
 	}
+
 $total_time_all_clients_human_readable = sprintf('%dh%02d',
                                          floor($total_minutes_all_clients / 60),
                                          $total_minutes_all_clients % 60);
+
+$total_time_all_clients_not_invoiced_human_readable = sprintf('%dh%02d',
+                                         floor($total_minutes_all_clients_not_invoiced / 60),
+                                         $total_minutes_all_clients_not_invoiced % 60);
 
 
 
 	?>
 
 <tr style="background:#dddddd;" align="right">
- <td colspan="5" align="right"><b>Total:</b> <?=$total_price_all_clients?>&euro; - <?=$total_time_all_clients_human_readable?></td>
+ <td colspan="5" align="right"><b>Total invoiced:</b> <?=$total_price_all_clients?>&euro; - <?=$total_time_all_clients_human_readable?></td>
 </tr>
+
+<tr style="background:#dddddd;" align="right">
+ <td colspan="5" align="right"><b>Total not invoiced:</b> <?=$total_price_all_clients_not_invoiced?>&euro; - <?=$total_time_all_clients_not_invoiced_human_readable?></td>
+</tr>
+
 </table>
 <br />
 <font color="red"><blink><b>> A générer UNE seule fois par mois <</b></blink></font><br />
