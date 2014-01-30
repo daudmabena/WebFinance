@@ -102,6 +102,7 @@ for($i=2040; $i>=2009; $i--) {
 	$clients_not_invoiced = array(
           552 => TRUE,
           676 => TRUE,
+          648 => TRUE,
         );
 
 	// Print preview
