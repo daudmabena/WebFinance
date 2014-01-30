@@ -203,7 +203,7 @@ for($i=2040; $i>=2009; $i--) {
                       continue;
                     }
 
-                  // Send invoice by email
+                  // Create and send invoice by email
                     if($mantis->createAndSendInvoice(
                         $ticket['id_client'],
                         $total_price_client,
