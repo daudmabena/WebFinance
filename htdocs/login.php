@@ -47,7 +47,7 @@ if(isset($_POST['user_login'],$_POST['user_password'])){
 
   }
 
-  header("Location: /login?err=1");
+  header("Location: /login.php?err=1");
   exit;
  }
 ?>
