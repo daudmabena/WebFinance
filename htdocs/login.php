@@ -37,7 +37,7 @@ if(isset($_POST['user_login'],$_POST['user_password'])){
   $User = new User();
   $test = $User->login($_POST);
   if($test>0) {
-    if ($_POST['came_from'] != "" AND !preg_match('/login.php$/i',$_POST['came_from']) AND !preg_match('/passwd.php$/i',$_POST['came_from']) ) {
+    if ($_POST['came_from'] != "" AND !preg_match('/login.php$/i',$_POST['came_from']) ) {
       header("Location: ".$_POST['came_from']);
 	  exit;
     }
@@ -83,7 +83,6 @@ if(isset($_GET['err'])){
     </table>
     </form>
 </div>
-<center><a href="passwd.php"><?= _("Forgot password")?></a></center>
 <?
 $Revision = '$Revision: 551 $';
 include("bottom.php");
