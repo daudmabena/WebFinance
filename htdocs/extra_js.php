@@ -17,8 +17,7 @@
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-foreach ($extra_js as $js) {
+foreach ($extra_js as $js)
   printf('<script type="text/javascript" src="%s"></script>'."\n", $js);
-}
 
 ?>
