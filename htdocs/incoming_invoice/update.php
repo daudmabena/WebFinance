@@ -73,7 +73,7 @@ switch($_POST['action'])
 
   case 'Save and auto-advance':
     $q = "
-SELECT id
+SELECT md5
 FROM incoming_invoice
 WHERE paid = 'unknown'
   OR date IS NULL
@@ -93,7 +93,7 @@ LIMIT 1
     }
 
     $row = mysql_fetch_assoc($result);
-    header("Location: edit.php?id=$row[id]");
+    header("Location: edit.php?md5=$row[md5]");
     exit;
 }
 
