@@ -21,6 +21,13 @@
 
 require("../inc/main.php");
 
+$User = new User();
+if(!$User->isAuthorized("manager,accounting,employee")){
+  $_SESSION['came_from'] = $_SERVER['REQUEST_URI'];
+  header("Location: /login.php");
+  exit;
+}
+
 if(!isset($_POST['md5'],
     $_POST['paid'],
     $_POST['date'],
