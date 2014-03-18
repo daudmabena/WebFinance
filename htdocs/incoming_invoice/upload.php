@@ -27,9 +27,10 @@ function upload_file($file = '', $filename = '')
   $destination_file = rtrim('../../incoming_invoice/' . chunk_split($md5, 4, '/'), '/');
 
   // Create directory
-  system("mkdir -p " . dirname($destination_file), $rc);
+  $cmd = "mkdir -p " . dirname($destination_file);
+  system($cmd, $rc);
   if ($rc != 0)
-    die('mkdir failed');
+    die("$cmd failed");
 
   // Check if destination file already exists
   if(file_exists($destination_file))
