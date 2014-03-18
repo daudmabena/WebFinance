@@ -128,6 +128,9 @@ while($row_provider = mysql_fetch_assoc($result_provider))
 ?>
 
    </select>
+   &nbsp;
+   <a href="/prospection/fiche_prospect.php?action=_new" onclick="return ask_confirmation('Are you sure you want to create a new provider?')" target="_blank">Add provider</a>
+
    </td>
   </tr>
 
