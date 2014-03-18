@@ -29,7 +29,6 @@ if(!$User->isAuthorized("manager,accounting,employee")){
 }
 
 $roles = 'manager,employee';
-require("../top.php");
 
 CybPHP_Validate::ValidateMD5($_GET['md5']);
 
