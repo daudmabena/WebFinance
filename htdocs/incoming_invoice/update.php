@@ -42,7 +42,7 @@ if(!isset($_POST['md5'],
 if(empty($_POST['provider_id']))
   $_POST['provider_id'] = 'NULL';
 
-if(empty($_POST['vat']))
+if($_POST['vat'] == '')
   $_POST['vat'] = 'NULL';
 
 if(empty($_POST['total_amount']))
