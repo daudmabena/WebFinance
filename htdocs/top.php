@@ -74,7 +74,7 @@ $search_button_on = '/imgs/boutons/'.urlencode(_('Search')."_on_".$User->prefs->
   <title><?= ($title=="")?"":"$title - " ?>Webfinance</title>
   <script type="text/javascript" language="javascript" src="/javascript/jquery/jquery.js"></script>
   <script type="text/javascript" language="javascript" src="/js/preloader.js.php"></script>
-  <?include "extra_js.php" ?>
+  <?require "extra_js.php" ?>
   <?require "extra_css.php" ?>
 </head>
 
