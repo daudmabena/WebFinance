@@ -215,9 +215,9 @@ while($row_provider = mysql_fetch_assoc($result_provider))
 
 </td>
 <td>
-<a href="#" onclick="RenderPDFPage(--CurrentPDFPage);">previous page</a>
+<p align="left" style="display:inline"><a href="#" onclick="RenderPDFPage(--CurrentPDFPage);"><<</a></p> / <p align="right" style="display:inline"><a href="#" onclick="RenderPDFPage(++CurrentPDFPage);">>></a></p>
+<br/>
 <canvas id="the-canvas" style="border:1px solid black;"></canvas>
-<a href="#" onclick="RenderPDFPage(++CurrentPDFPage);">next page</a>
 
 </td>
 </tr>
