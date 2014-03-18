@@ -157,7 +157,7 @@ while($row_provider = mysql_fetch_assoc($result_provider))
 <tr>
   <td> </td>
   <td>
-    <input type="submit" name="action" value="Save and auto-advance"/>
+    <input type="submit" name="action" value="Save and auto-advance" title="Save this invoice and go to the next invoice that needs information"/>
     <br/>
     <input type="submit" name="action" value="Save"/>
   </td>
