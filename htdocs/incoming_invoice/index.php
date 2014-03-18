@@ -189,8 +189,8 @@ while($row = mysql_fetch_assoc($result))
  </td>
  <td> <?=(empty($row['date'])?'<img src="/imgs/icons/warning.png" title="No date specified">':"$row[date]")?> </td>
  <td> <?=(empty($row['provider_id'])?'<img src="/imgs/icons/warning.png" title="No provider specified">':"<a href=\"/prospection/fiche_prospect.php?id=$row[provider_id]\">$row[nom]</a>")?> </td>
- <td> <?=(empty($row['total_amount'])?'<img src="/imgs/icons/warning.png" title="No amount specified">':"$row[total_amount]$row[currency]")?> </td>
- <td> <?=(empty($row['vat'])?'<img src="/imgs/icons/warning.png" title="No VAT specified">':"$row[vat]$row[currency]")?> </td>
+ <td align="right"> <?=(empty($row['total_amount'])?'<img src="/imgs/icons/warning.png" title="No amount specified">':"$row[total_amount]$row[currency]")?> </td>
+ <td align="right"> <?=(empty($row['vat'])?'<img src="/imgs/icons/warning.png" title="No VAT specified">':"$row[vat]$row[currency]")?> </td>
  <td> <?=$row['note']?> </td>
 </tr>
 
