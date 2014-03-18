@@ -82,7 +82,7 @@ $row = mysql_fetch_assoc($result);
 PDFJS.getDocument('download.php?md5=<?=$_GET[md5]?>').then(function(pdf) {
   // Using promise to fetch the page
   pdf.getPage(1).then(function(page) {
-    var scale = 1.3;
+    var scale = 1.2;
     var viewport = page.getViewport(scale);
 
     //
