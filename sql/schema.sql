@@ -597,3 +597,17 @@ CREATE TABLE IF NOT EXISTS `mantis_custom_field2price` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_value` (`custom_field_name`, `custom_field_value`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS incoming_invoice (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  provider_id INT(11) UNSIGNED DEFAULT NULL,
+  vat DECIMAL(14,2) UNSIGNED DEFAULT NULL,
+  total_amount DECIMAL(14,2) UNSIGNED DEFAULT NULL,
+  currency ENUM('€', '$') DEFAULT '€',
+  date DATE,
+  paid ENUM('unknown', 'paid', 'unpaid') DEFAULT 'unknown',
+  md5 CHAR(32) NOT NULL,
+  note VARCHAR(256),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY (`md5`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
