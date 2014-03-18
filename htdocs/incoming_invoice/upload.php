@@ -85,7 +85,6 @@ function upload_zip($zip_file = '')
 }
 
 require("../inc/main.php");
-echo '<pre>';
 
 $User = new User();
 if(!$User->isAuthorized("manager,accounting,employee")){
