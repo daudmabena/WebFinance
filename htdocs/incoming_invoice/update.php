@@ -45,11 +45,16 @@ if(empty($_POST['total_amount']))
 foreach(array('paid', 'date', 'provider_id', 'vat', 'total_amount', 'currency', 'note', 'md5') as $key)
   $_POST[$key] = mysql_real_escape_string($_POST[$key]);
 
+if(empty($_POST['date']))
+  $_POST['date'] = 'NULL';
+else
+  $_POST['date'] = "'$_POST[date]'";  
+
 $q = "
 UPDATE incoming_invoice
 SET
  paid         = '$_POST[paid]',
- date         = '$_POST[date]',
+ date         = $_POST[date],
  provider_id  = $_POST[provider_id],
  vat          = $_POST[vat],
  total_amount = $_POST[total_amount],
