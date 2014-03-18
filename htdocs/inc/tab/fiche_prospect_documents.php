@@ -30,6 +30,17 @@ $document = new WebfinanceDocument;
 
 <tr>
    <td style="border-bottom: solid 1px #777;" colspan="4">
+          <b style="font-size: 16px;">Incoming invoices</b>
+   </td>
+</tr>
+
+<tr class="facture_line" valign="middle">
+    <td> <a href="/incoming_invoice/?provider_id_filter=<?=$_GET[id]?>">Incoming&nbsp;invoices</a> </td>
+</tr>
+
+
+<tr>
+   <td style="border-bottom: solid 1px #777;" colspan="4">
           <b style="font-size: 16px;">Documents</b>
    </td>
 </tr>
