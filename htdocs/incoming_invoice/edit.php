@@ -76,12 +76,14 @@ $row = mysql_fetch_assoc($result);
 
 'use strict';
 
+function RenderPDFPage(pageNumber) {
+
 //
 // Fetch the PDF document from the URL using promices
 //
 PDFJS.getDocument('download.php?md5=<?=$_GET[md5]?>').then(function(pdf) {
   // Using promise to fetch the page
-  pdf.getPage(1).then(function(page) {
+  pdf.getPage(pageNumber).then(function(page) {
     var scale = 1.2;
     var viewport = page.getViewport(scale);
 
@@ -103,7 +105,10 @@ PDFJS.getDocument('download.php?md5=<?=$_GET[md5]?>').then(function(pdf) {
     page.render(renderContext);
   });
 });
+}
 
+CurrentPDFPage=1;
+RenderPDFPage(CurrentPDFPage);
 </script>
 
 <a href="./"><h1><?=_('Incoming invoices');?></h1></a>
@@ -210,7 +215,10 @@ while($row_provider = mysql_fetch_assoc($result_provider))
 
 </td>
 <td>
-<canvas id="the-canvas" style="border:1px solid black;"/>
+<a href="#" onclick="RenderPDFPage(--CurrentPDFPage);">previous page</a>
+<canvas id="the-canvas" style="border:1px solid black;"></canvas>
+<a href="#" onclick="RenderPDFPage(++CurrentPDFPage);">next page</a>
+
 </td>
 </tr>
 </table>
