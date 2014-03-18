@@ -55,12 +55,10 @@ mysql_query("INSERT INTO incoming_invoice
 SET md5='$md5', note='".$_FILES['file']['name']."'")
   or die(mysql_error());
 
-$id = mysql_insert_id();
-
 // Move the uploaded file to the final destination
 if (!move_uploaded_file($_FILES['file']['tmp_name'], $upload_file))
   die("Failed uploading $upload_file");
 
-header('Location: ./edit.php?id=' . $id);
+header('Location: ./edit.php?md5=' . $md5);
 exit;
 ?>

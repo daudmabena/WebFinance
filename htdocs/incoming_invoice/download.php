@@ -30,8 +30,7 @@ if(!$User->isAuthorized("manager,accounting,employee")){
   exit;
 }
 
-if(!preg_match('/^[a-z0-9]{32}$/', $_GET['md5']))
-  die('Invalid MD5');
+CybPHP_Validate::ValidateMD5($_GET['md5']);
 
 $file = rtrim('../../incoming_invoice/' . chunk_split($_GET['md5'], 4, '/'), '/');
 

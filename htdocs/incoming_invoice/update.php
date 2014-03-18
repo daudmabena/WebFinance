@@ -21,7 +21,7 @@
 
 include("../inc/main.php");
 
-if(!isset($_POST['id'],
+if(!isset($_POST['md5'],
     $_POST['paid'],
     $_POST['date'],
     $_POST['provider_id'],
@@ -32,11 +32,6 @@ if(!isset($_POST['id'],
     $_POST['note']))
   die('Missing parameter');
 
-if(empty($_POST['date']))
-  $_POST['date'] = 'NULL';
-else
-  $_POST['date'] = "'$_POST[date]'";
-
 if(empty($_POST['provider_id']))
   $_POST['provider_id'] = 'NULL';
 
@@ -46,17 +41,21 @@ if(empty($_POST['vat']))
 if(empty($_POST['total_amount']))
   $_POST['total_amount'] = 'NULL';
 
+# SQL escape
+foreach(array('paid', 'date', 'provider_id', 'vat', 'total_amount', 'currency', 'note', 'md5') as $key)
+  $_POST[$key] = mysql_real_escape_string($_POST[$key]);
+
 $q = "
 UPDATE incoming_invoice
 SET
  paid         = '$_POST[paid]',
- date         = $_POST[date],
+ date         = '$_POST[date]',
  provider_id  = $_POST[provider_id],
  vat          = $_POST[vat],
  total_amount = $_POST[total_amount],
  currency     = '$_POST[currency]',
  note         = '$_POST[note]'
-WHERE id = $_POST[id]";
+WHERE md5     = '$_POST[md5]'";
 
 $result = mysql_query($q)
   or die(mysql_error() . ' ' . $q);
@@ -78,6 +77,7 @@ WHERE paid = 'unknown'
   OR total_amount IS NULL
 LIMIT 1
 ";
+
     $result = mysql_query($q)
       or die(mysql_error() . ' ' . $q);
 

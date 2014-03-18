@@ -162,7 +162,7 @@ if(isset($_GET['provider_id_filter']) and $_GET['provider_id_filter'] != 'all')
 }
 
 $q = "
-SELECT ii.id, ii.provider_id, ii.vat, ii.total_amount, ii.currency, ii.date, ii.paid, ii.note, c.nom
+SELECT ii.md5, ii.provider_id, ii.vat, ii.total_amount, ii.currency, ii.date, ii.paid, ii.note, c.nom
 FROM incoming_invoice ii
 LEFT OUTER JOIN webfinance_clients c ON ii.provider_id = c.id_client
 $where
@@ -186,7 +186,7 @@ while($row = mysql_fetch_assoc($result))
 <tr>
  <td>
    <img src="/imgs/icons/<?=$status_icon?>" title="Paid status">
-   <a href="edit.php?id=<?=$row[id]?>"><img src="/imgs/icons/edit.png" border="0"></a>
+   <a href="edit.php?md5=<?=$row[md5]?>"><img src="/imgs/icons/edit.png" border="0"></a>
  </td>
  <td> <?=(empty($row['date'])?'<img src="/imgs/icons/warning.png">':"$row[date]")?> </td>
  <td> <?=(empty($row['provider_id'])?'<img src="/imgs/icons/warning.png">':"<a href=\"/prospection/fiche_prospect.php?id=$row[provider_id]\">$row[nom]</a>")?> </td>

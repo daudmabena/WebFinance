@@ -31,8 +31,7 @@ if(!$User->isAuthorized("manager,accounting,employee")){
 $roles = 'manager,employee';
 include("../top.php");
 
-if(empty($_GET['md5']))
-  die('Missing MD5');
+CybPHP_Validate::ValidateMD5($_GET['md5']);
 
 $_GET['md5'] = mysql_real_escape_string($_GET['md5']);
 

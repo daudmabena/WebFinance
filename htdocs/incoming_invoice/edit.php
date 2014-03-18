@@ -45,22 +45,21 @@ $roles = 'manager,employee';
 include("../top.php");
 include("nav.php");
 
-if(empty($_GET['id']) or !is_numeric($_GET['id']))
-  die('Missing ID');
+CybPHP_Validate::ValidateMD5($_GET['md5']);
 
-$_GET['id'] = mysql_real_escape_string($_GET['id']);
+$_GET['md5'] = mysql_real_escape_string($_GET['md5']);
 
 $q = "
-SELECT ii.id, ii.provider_id, ii.vat, ii.total_amount, ii.currency, ii.date, ii.paid, ii.note, c.nom, ii.md5
+SELECT ii.provider_id, ii.vat, ii.total_amount, ii.currency, ii.date, ii.paid, ii.note, c.nom
 FROM incoming_invoice ii
 LEFT OUTER JOIN webfinance_clients c ON ii.provider_id = c.id_client
-WHERE ii.id = $_GET[id]";
+WHERE ii.md5 = '$_GET[md5]'";
 
 $result = mysql_query($q)
   or die(mysql_error() . ' ' . $q);
 
 if(mysql_num_rows($result) != 1)
-  die('Invalid ID');
+  die('Invalid MD5');
 
 $row = mysql_fetch_assoc($result);
 
@@ -80,11 +79,11 @@ $row = mysql_fetch_assoc($result);
 
 <form action="update.php" method="POST">
 
-  <a href="download.php?md5=<?=$row[md5]?>"><img src="/imgs/icons/pdf.png" border="0"></a>
+  <a href="download.php?md5=<?=$_GET[md5]?>"><img src="/imgs/icons/pdf.png" border="0"></a>
   &nbsp;
-  <a href="delete.php?md5=<?=$row[md5]?>" onclick="return ask_confirmation('Are you sure?')"><img src="/imgs/icons/delete.png" border="0"></a>
+  <a href="delete.php?md5=<?=$_GET[md5]?>" onclick="return ask_confirmation('Are you sure?')"><img src="/imgs/icons/delete.png" border="0"></a>
 
- <input type="hidden" name="id" value="<?=$_GET[id]?>" />
+ <input type="hidden" name="md5" value="<?=$_GET[md5]?>" />
 
   <tr>
    <td> Paid </td>
@@ -180,7 +179,7 @@ while($row_provider = mysql_fetch_assoc($result_provider))
 //
 // Fetch the PDF document from the URL using promices
 //
-PDFJS.getDocument('download.php?md5=<?=$row[md5]?>').then(function(pdf) {
+PDFJS.getDocument('download.php?md5=<?=$_GET[md5]?>').then(function(pdf) {
   // Using promise to fetch the page
   pdf.getPage(1).then(function(page) {
     var scale = 1.5;
