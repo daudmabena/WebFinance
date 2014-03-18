@@ -43,7 +43,7 @@ require("../top.php");
 <h3>Upload</h3>
 <form method="POST" action="upload.php" enctype="multipart/form-data">
   <input type="file" name="file" />
-  <input type="submit" name="upload" value="Upload"/>
+  <input type="submit" name="upload" value="Upload" title="Supported extensions: PDF, ZIP"/>
 </form>
 
 <br/>
@@ -184,13 +184,13 @@ while($row = mysql_fetch_assoc($result))
 
 <tr>
  <td>
-   <img src="/imgs/icons/<?=$status_icon?>" title="Paid status">
-   <a href="edit.php?md5=<?=$row[md5]?>"><img src="/imgs/icons/edit.png" border="0"></a>
+   <img src="/imgs/icons/<?=$status_icon?>" title="Paid status: <?=$row[paid]?>">
+   <a href="edit.php?md5=<?=$row[md5]?>"><img src="/imgs/icons/edit.png" border="0" title="Edit invoice"></a>
  </td>
- <td> <?=(empty($row['date'])?'<img src="/imgs/icons/warning.png">':"$row[date]")?> </td>
- <td> <?=(empty($row['provider_id'])?'<img src="/imgs/icons/warning.png">':"<a href=\"/prospection/fiche_prospect.php?id=$row[provider_id]\">$row[nom]</a>")?> </td>
- <td> <?=(empty($row['total_amount'])?'<img src="/imgs/icons/warning.png">':"$row[total_amount]$row[currency]")?> </td>
- <td> <?=(empty($row['vat'])?'<img src="/imgs/icons/warning.png">':"$row[vat]$row[currency]")?> </td>
+ <td> <?=(empty($row['date'])?'<img src="/imgs/icons/warning.png" title="No date specified">':"$row[date]")?> </td>
+ <td> <?=(empty($row['provider_id'])?'<img src="/imgs/icons/warning.png" title="No provider specified">':"<a href=\"/prospection/fiche_prospect.php?id=$row[provider_id]\">$row[nom]</a>")?> </td>
+ <td> <?=(empty($row['total_amount'])?'<img src="/imgs/icons/warning.png" title="No amount specified">':"$row[total_amount]$row[currency]")?> </td>
+ <td> <?=(empty($row['vat'])?'<img src="/imgs/icons/warning.png" title="No VAT specified">':"$row[vat]$row[currency]")?> </td>
  <td> <?=$row['note']?> </td>
 </tr>
 
