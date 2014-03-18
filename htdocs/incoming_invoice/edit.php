@@ -70,9 +70,49 @@ $row = mysql_fetch_assoc($result);
    });
 </script>
 
+<!-- PDF viewer -->
+<script type="text/javascript">
+   PDFJS.workerSrc = '/javascript/pdf/pdf.js';
+
+'use strict';
+
+//
+// Fetch the PDF document from the URL using promices
+//
+PDFJS.getDocument('download.php?md5=<?=$_GET[md5]?>').then(function(pdf) {
+  // Using promise to fetch the page
+  pdf.getPage(1).then(function(page) {
+    var scale = 1.3;
+    var viewport = page.getViewport(scale);
+
+    //
+    // Prepare canvas using PDF page dimensions
+    //
+    var canvas = document.getElementById('the-canvas');
+    var context = canvas.getContext('2d');
+    canvas.height = viewport.height;
+    canvas.width = viewport.width;
+
+    //
+    // Render PDF page into canvas context
+    //
+    var renderContext = {
+      canvasContext: context,
+      viewport: viewport
+    };
+    page.render(renderContext);
+  });
+});
+
+</script>
+
 <a href="./"><h1><?=_('Incoming invoices');?></h1></a>
 
 <br />
+
+<table border="0">
+<tr>
+<td valign="top">
 
 <table border="1" cellspacing="0" cellpadding="5">
 
@@ -168,45 +208,12 @@ while($row_provider = mysql_fetch_assoc($result_provider))
 
 </form>
 
-
-<!-- PDF viewer -->
-<script type="text/javascript">
-   PDFJS.workerSrc = '/javascript/pdf/pdf.js';
-
-'use strict';
-
-//
-// Fetch the PDF document from the URL using promices
-//
-PDFJS.getDocument('download.php?md5=<?=$_GET[md5]?>').then(function(pdf) {
-  // Using promise to fetch the page
-  pdf.getPage(1).then(function(page) {
-    var scale = 1.5;
-    var viewport = page.getViewport(scale);
-
-    //
-    // Prepare canvas using PDF page dimensions
-    //
-    var canvas = document.getElementById('the-canvas');
-    var context = canvas.getContext('2d');
-    canvas.height = viewport.height;
-    canvas.width = viewport.width;
-
-    //
-    // Render PDF page into canvas context
-    //
-    var renderContext = {
-      canvasContext: context,
-      viewport: viewport
-    };
-    page.render(renderContext);
-  });
-});
-
-</script>
-
+</td>
+<td>
 <canvas id="the-canvas" style="border:1px solid black;"/>
-
+</td>
+</tr>
+</table>
 
 <?
 require("../bottom.php");
