@@ -19,7 +19,7 @@
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-include("../inc/main.php");
+require("../inc/main.php");
 
 $User = new User();
 if(!$User->isAuthorized("manager,accounting,employee")){
@@ -29,8 +29,7 @@ if(!$User->isAuthorized("manager,accounting,employee")){
 }
 
 $roles = 'manager,employee';
-include("../top.php");
-include("nav.php");
+require("../top.php");
 
 ?>
 
@@ -203,6 +202,6 @@ while($row = mysql_fetch_assoc($result))
 </form>
 
 <?
-include("../bottom.php");
+require("../bottom.php");
 
 ?>

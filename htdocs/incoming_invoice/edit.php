@@ -42,8 +42,7 @@ array_push($extra_css, '/javascript/jquery-ui/css/smoothness/jquery-ui.css');
 array_push($extra_js, '/javascript/pdf/pdf.js');
 
 $roles = 'manager,employee';
-include("../top.php");
-include("nav.php");
+require("../top.php");
 
 CybPHP_Validate::ValidateMD5($_GET['md5']);
 
@@ -210,6 +209,6 @@ PDFJS.getDocument('download.php?md5=<?=$_GET[md5]?>').then(function(pdf) {
 
 
 <?
-include("../bottom.php");
+require("../bottom.php");
 
 ?>

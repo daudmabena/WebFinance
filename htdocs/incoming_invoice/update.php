@@ -19,7 +19,7 @@
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-include("../inc/main.php");
+require("../inc/main.php");
 
 if(!isset($_POST['md5'],
     $_POST['paid'],
