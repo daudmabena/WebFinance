@@ -120,6 +120,7 @@ while($row = mysql_fetch_assoc($result))
  <th>Total</th>
  <th>VAT</th>
  <th>Note</th>
+ <th>Uploader</th>
 </tr>
 
 
@@ -161,8 +162,9 @@ if(isset($_GET['provider_id_filter']) and $_GET['provider_id_filter'] != 'all')
 }
 
 $q = "
-SELECT ii.md5, ii.provider_id, ii.vat, ii.total_amount, ii.currency, ii.date, ii.paid, ii.note, c.nom
+SELECT ii.md5, ii.provider_id, ii.vat, ii.total_amount, ii.currency, ii.date, ii.paid, ii.note, c.nom, u.first_name, u.last_name
 FROM incoming_invoice ii
+JOIN webfinance_users u ON u.id_user = ii.id_user
 LEFT OUTER JOIN webfinance_clients c ON ii.provider_id = c.id_client
 $where
 ORDER BY ii.date DESC";
@@ -192,6 +194,7 @@ while($row = mysql_fetch_assoc($result))
  <td align="right"> <?=(empty($row['total_amount'])?'<img src="/imgs/icons/warning.png" title="No amount specified">':"$row[total_amount]$row[currency]")?> </td>
  <td align="right"> <?=(empty($row['vat'])?'<img src="/imgs/icons/warning.png" title="No VAT specified">':"$row[vat]$row[currency]")?> </td>
  <td> <?=$row['note']?> </td>
+ <td> <?=$row['first_name']?> <?=$row['last_name']?> </td>
 </tr>
 
 <?
