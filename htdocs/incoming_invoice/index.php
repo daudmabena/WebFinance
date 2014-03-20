@@ -194,7 +194,7 @@ while($row = mysql_fetch_assoc($result))
  <td align="right"> <?=(empty($row['total_amount'])?'<img src="/imgs/icons/warning.png" title="No amount specified">':"$row[total_amount]$row[currency]")?> </td>
  <td align="right"> <?=(empty($row['vat'])?'<img src="/imgs/icons/warning.png" title="No VAT specified">':"$row[vat]$row[currency]")?> </td>
  <td> <?=$row['note']?> </td>
- <td> <?=$row['first_name']?> <?=$row['last_name']?> </td>
+ <td> <?=$row['first_name']?>&nbsp;<?=$row['last_name']?> </td>
 </tr>
 
 <?
