@@ -41,7 +41,10 @@ function upload_file($file = '', $filename = '')
   }
 
   $note = mysql_real_escape_string($filename);
-  mysql_query("INSERT INTO incoming_invoice SET md5='$md5', note='$note'")
+  mysql_query("INSERT INTO incoming_invoice
+SET md5='$md5',
+  note='$note',
+  id_user=$_SESSION[id_user]")
     or die(mysql_error());
 
   // Move the uploaded file to the final destination
