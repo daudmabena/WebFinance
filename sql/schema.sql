@@ -608,11 +608,11 @@ CREATE TABLE IF NOT EXISTS incoming_invoice (
   paid ENUM('unknown', 'paid', 'unpaid') DEFAULT 'unknown',
   note VARCHAR(256),
   id_user INT(11) UNSIGNED DEFAULT NULL,
-  PRIMARY KEY (`md5`),
+  PRIMARY KEY (md5),
   KEY (provider_id),
   KEY (vat),
   KEY (total_amount),
   KEY (date),
   KEY (note),
-  KEY id_user
+  KEY (id_user)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
