@@ -162,7 +162,18 @@ if(isset($_GET['provider_id_filter']) and $_GET['provider_id_filter'] != 'all')
 }
 
 $q = "
-SELECT ii.md5, ii.provider_id, ii.vat, ii.total_amount, ii.currency, ii.date, ii.paid, ii.note, c.nom, u.first_name, u.last_name
+SELECT
+  ii.md5,
+  ii.provider_id,
+  ii.vat,
+  ii.total_amount,
+  ii.currency,
+  ii.date,
+  ii.paid,
+  ii.note,
+  c.nom,
+  u.first_name,
+  u.last_name
 FROM incoming_invoice ii
 JOIN webfinance_users u ON u.id_user = ii.id_user
 LEFT OUTER JOIN webfinance_clients c ON ii.provider_id = c.id_client
