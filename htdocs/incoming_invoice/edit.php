@@ -85,34 +85,33 @@ $row = mysql_fetch_assoc($result);
 'use strict';
 
 function RenderPDFPage(pageNumber) {
+  //
+  // Fetch the PDF document from the URL using promices
+  //
+  PDFJS.getDocument('download.php?md5=<?=$_GET[md5]?>').then(function(pdf) {
+      // Using promise to fetch the page
+      pdf.getPage(pageNumber).then(function(page) {
+          var scale = 1.2;
+          var viewport = page.getViewport(scale);
 
-//
-// Fetch the PDF document from the URL using promices
-//
-PDFJS.getDocument('download.php?md5=<?=$_GET[md5]?>').then(function(pdf) {
-  // Using promise to fetch the page
-  pdf.getPage(pageNumber).then(function(page) {
-    var scale = 1.2;
-    var viewport = page.getViewport(scale);
+          //
+          // Prepare canvas using PDF page dimensions
+          //
+          var canvas = document.getElementById('the-canvas');
+          var context = canvas.getContext('2d');
+          canvas.height = viewport.height;
+          canvas.width = viewport.width;
 
-    //
-    // Prepare canvas using PDF page dimensions
-    //
-    var canvas = document.getElementById('the-canvas');
-    var context = canvas.getContext('2d');
-    canvas.height = viewport.height;
-    canvas.width = viewport.width;
-
-    //
-    // Render PDF page into canvas context
-    //
-    var renderContext = {
-      canvasContext: context,
-      viewport: viewport
-    };
-    page.render(renderContext);
-  });
-});
+          //
+          // Render PDF page into canvas context
+          //
+          var renderContext = {
+          canvasContext: context,
+          viewport: viewport
+          };
+          page.render(renderContext);
+        });
+    });
 }
 
 CurrentPDFPage=1;
