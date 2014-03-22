@@ -32,7 +32,6 @@ if(!$User->isAuthorized("manager,accounting,employee")){
 array_push($extra_js, "/js/ask_confirmation.js");
 
 # Load JQuery UI Javascript
-array_push($extra_js, '/javascript/jquery/jquery.js');
 array_push($extra_js, '/javascript/jquery-ui/jquery-ui.js');
 
 # Load Datepicker CSS
