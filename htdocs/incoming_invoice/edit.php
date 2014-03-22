@@ -48,7 +48,15 @@ CybPHP_Validate::ValidateMD5($_GET['md5']);
 $_GET['md5'] = mysql_real_escape_string($_GET['md5']);
 
 $q = "
-SELECT ii.provider_id, ii.vat, ii.total_amount, ii.currency, ii.date, ii.paid, ii.note, c.nom
+SELECT
+  ii.provider_id,
+  ii.vat,
+  ii.total_amount,
+  ii.currency,
+  ii.date,
+  ii.paid,
+  ii.note,
+  c.nom
 FROM incoming_invoice ii
 LEFT OUTER JOIN webfinance_clients c ON ii.provider_id = c.id_client
 WHERE ii.md5 = '$_GET[md5]'";
