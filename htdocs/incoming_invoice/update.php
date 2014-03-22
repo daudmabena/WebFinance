@@ -36,7 +36,8 @@ if(!isset($_POST['md5'],
     $_POST['total_amount'],
     $_POST['currency'],
     $_POST['action'],
-    $_POST['note']))
+    $_POST['note'],
+    $_POST['accounting']))
   die('Missing parameter');
 
 if(empty($_POST['provider_id']))
@@ -49,7 +50,7 @@ if(empty($_POST['total_amount']))
   $_POST['total_amount'] = 'NULL';
 
 # SQL escape
-foreach(array('paid', 'date', 'provider_id', 'vat', 'total_amount', 'currency', 'note', 'md5') as $key)
+foreach(array('paid', 'date', 'provider_id', 'vat', 'total_amount', 'currency', 'note', 'md5', 'accounting') as $key)
   $_POST[$key] = mysql_real_escape_string($_POST[$key]);
 
 if(empty($_POST['date']))
@@ -66,7 +67,8 @@ SET
  vat          = $_POST[vat],
  total_amount = $_POST[total_amount],
  currency     = '$_POST[currency]',
- note         = '$_POST[note]'
+ note         = '$_POST[note]',
+ accounting   = '$_POST[accounting]'
 WHERE md5     = '$_POST[md5]'";
 
 $result = mysql_query($q)
@@ -87,6 +89,7 @@ WHERE paid = 'unknown'
   OR provider_id IS NULL
   OR vat IS NULL
   OR total_amount IS NULL
+  OR accounting = 'todo'
 LIMIT 1
 ";
 

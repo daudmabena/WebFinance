@@ -122,6 +122,18 @@ while($row = mysql_fetch_assoc($result))
  <th>Total</th>
  <th>VAT</th>
  <th>Note</th>
+
+ <th>
+
+<select name="accounting_filter" onchange="this.form.submit();">
+  <option value="none">Accounting</option>
+  <option value="todo" <?=($_GET['accounting_filter']=='todo'?'selected':'')?>>Todo</option>
+  <option value="done" <?=($_GET['accounting_filter']=='done'?'selected':'')?>>Done</option>
+  <option value="canceled" <?=($_GET['accounting_filter']=='canceled'?'selected':'')?>>Canceled</option>
+</select>
+
+ </th>
+
  <th>Uploader</th>
 </tr>
 
@@ -134,18 +146,29 @@ switch($_GET['status_filter'])
 {
   # Show invoices with missing information
   case 'missing_information':
-    $where .= ' AND
+    $where .= " AND
   (ii.provider_id IS NULL
     OR ii.vat IS NULL
     OR ii.total_amount IS NULL
     OR ii.date IS NULL
-  )';
+    OR ii.accounting = 'todo'
+  )";
     break;
 
   case 'unknown':
   case 'paid':
   case 'unpaid':
     $where .= " AND ii.paid = '$_GET[status_filter]'";
+    break;
+}
+
+# Accounting filter
+switch($_GET['accounting_filter'])
+{
+  case 'todo':
+  case 'done':
+  case 'canceled':
+    $where .= " AND ii.accounting = '$_GET[accounting_filter]'";
     break;
 }
 
@@ -173,6 +196,7 @@ SELECT
   ii.date,
   ii.paid,
   ii.note,
+  ii.accounting,
   c.nom,
   u.first_name,
   u.last_name
@@ -195,6 +219,16 @@ while($row = mysql_fetch_assoc($result))
   );
 
   $status_icon = $status2icon[$row['paid']];
+
+  $accounting2icon = array(
+    'todo'     => 'warning.png',
+    'done'     => 'ok.gif',
+  );
+
+  $accounting_icon = '';
+  if(isset($accounting2icon[$row['accounting']]))
+    $accounting_icon = $accounting2icon[$row['accounting']];
+
 ?>
 
 <tr>
@@ -221,6 +255,10 @@ while($row = mysql_fetch_assoc($result))
 
  <td>
    <?=$row['note']?>
+ </td>
+
+ <td>
+   <?=(empty($accounting_icon) ? $row['accounting'] : "<img src=\"/imgs/icons/$accounting_icon\" title=\"Accounting status: $row[accounting]\"/>") ?>
  </td>
 
  <td>

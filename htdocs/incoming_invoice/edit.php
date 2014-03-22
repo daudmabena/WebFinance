@@ -56,6 +56,7 @@ SELECT
   ii.date,
   ii.paid,
   ii.note,
+  ii.accounting,
   c.nom
 FROM incoming_invoice ii
 LEFT OUTER JOIN webfinance_clients c ON ii.provider_id = c.id_client
@@ -204,6 +205,18 @@ while($row_provider = mysql_fetch_assoc($result_provider))
   <tr>
    <td> Note </td>
    <td> <input name="note" size="80" value="<?=$row[note]?>" type="text"/> </td>
+  </tr>
+
+
+  <tr>
+   <td> Accounting </td>
+   <td>
+
+ <input type="radio" name="accounting" value="todo" <?=($row['accounting']=='todo'?'checked':'')?>>todo</input>
+ <input type="radio" name="accounting" value="done" <?=($row['accounting']=='done'?'checked':'')?>>done</input>
+ <input type="radio" name="accounting" value="canceled" <?=($row['accounting']=='canceled'?'checked':'')?>>canceled</input>
+
+</td>
   </tr>
 
 <tr>
