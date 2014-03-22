@@ -140,9 +140,9 @@ RenderPDFPage(CurrentPDFPage);
    <td> Paid </td>
    <td>
 
- <input type="radio" name="paid" value="unknown" <?=($row['paid']=='unknown'?'checked':'')?>>Unknown</input>
- <input type="radio" name="paid" value="paid" <?=($row['paid']=='paid'?'checked':'')?>>Paid</input>
- <input type="radio" name="paid" value="unpaid" <?=($row['paid']=='unpaid'?'checked':'')?>>Unpaid</input>
+ <input type="radio" name="paid" value="unknown" <?=($row['paid']=='unknown'?'checked':'')?>>unknown</input>
+ <input type="radio" name="paid" value="paid" <?=($row['paid']=='paid'?'checked':'')?>>paid</input>
+ <input type="radio" name="paid" value="unpaid" <?=($row['paid']=='unpaid'?'checked':'')?>>unpaid</input>
 
 </td>
   </tr>

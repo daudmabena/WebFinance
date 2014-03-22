@@ -55,6 +55,7 @@ require("../top.php");
 <table width="100%" border="1" cellspacing="0" cellpadding="5">
 
 <tr>
+
  <th>
 
 <select name="status_filter" onchange="this.form.submit();">
@@ -66,6 +67,7 @@ require("../top.php");
 </select>
 
  </th>
+
  <th>
 
 <select name="date_filter" onchange="this.form.submit();">>
@@ -200,12 +202,30 @@ while($row = mysql_fetch_assoc($result))
    <img src="/imgs/icons/<?=$status_icon?>" title="Paid status: <?=$row[paid]?>">
    <a href="edit.php?md5=<?=$row[md5]?>"><img src="/imgs/icons/edit.png" border="0" title="Edit invoice"></a>
  </td>
- <td> <?=(empty($row['date'])?'<img src="/imgs/icons/warning.png" title="No date specified">':"$row[date]")?> </td>
- <td> <?=(empty($row['provider_id'])?'<img src="/imgs/icons/warning.png" title="No provider specified">':"<a href=\"/prospection/fiche_prospect.php?id=$row[provider_id]\">$row[nom]</a>")?> </td>
- <td align="right"> <?=(empty($row['total_amount'])?'<img src="/imgs/icons/warning.png" title="No total amount specified">':"$row[total_amount]$row[currency]")?> </td>
- <td align="right"> <?=(empty($row['vat'])?'<img src="/imgs/icons/warning.png" title="No VAT specified">':"$row[vat]$row[currency]")?> </td>
- <td> <?=$row['note']?> </td>
- <td> <?=$row['first_name']?>&nbsp;<?=$row['last_name']?> </td>
+
+ <td>
+   <?=(empty($row['date'])?'<img src="/imgs/icons/warning.png" title="No date specified">':"$row[date]")?>
+ </td>
+
+ <td>
+   <?=(empty($row['provider_id'])?'<img src="/imgs/icons/warning.png" title="No provider specified">':"<a href=\"/prospection/fiche_prospect.php?id=$row[provider_id]\">$row[nom]</a>")?>
+ </td>
+
+ <td align="right">
+   <?=(empty($row['total_amount'])?'<img src="/imgs/icons/warning.png" title="No total amount specified"/>':"$row[total_amount]$row[currency]")?>
+ </td>
+
+ <td align="right">
+   <?=(empty($row['vat'])?'<img src="/imgs/icons/warning.png" title="No VAT specified"/>':"$row[vat]$row[currency]")?>
+ </td>
+
+ <td>
+   <?=$row['note']?>
+ </td>
+
+ <td>
+   <?=$row['first_name']?>&nbsp;<?=$row['last_name']?>
+ </td>
 </tr>
 
 <?
