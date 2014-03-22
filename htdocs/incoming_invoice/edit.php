@@ -110,8 +110,11 @@ function RenderPDFPage(pageNumber) {
           viewport: viewport
           };
           page.render(renderContext);
+          document.getElementById('page_number').innerHTML='page ' + pageNumber;
+
         });
     });
+
 }
 
 CurrentPDFPage=1;
@@ -234,7 +237,9 @@ while($row_provider = mysql_fetch_assoc($result_provider))
 
 </td>
 <td>
-<p align="left" style="display:inline"><a href="#" onclick="RenderPDFPage(--CurrentPDFPage);"><<</a></p> / <p align="right" style="display:inline"><a href="#" onclick="RenderPDFPage(++CurrentPDFPage);">>></a></p>
+<p align="left" style="display:inline"><a href="#" onclick="RenderPDFPage(--CurrentPDFPage);"><<</a></p>
+<div id="page_number" style="display:inline">page 1</div>
+<p align="right" style="display:inline"><a href="#" onclick="RenderPDFPage(++CurrentPDFPage);">>></a></p>
 <br/>
 <canvas id="the-canvas" style="border:1px solid black;"></canvas>
 
