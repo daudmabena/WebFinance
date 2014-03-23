@@ -25,6 +25,26 @@ function focusOnglet(id) {
 
     onglet_shown = id;
   }
+
+    var pageurl = '/prospection/fiche_prospect.php?id=' + getQueryVariable('id') +
+	'&onglet=' + id;
+
+    if(pageurl != window.location)
+	window.history.pushState({path: pageurl}, '', pageurl);
+}
+
+// Stolen from
+// https://stackoverflow.com/questions/827368/using-the-get-parameter-of-a-url-in-javascript
+function getQueryVariable(variable) {
+  var query = window.location.search.substring(1);
+  var vars = query.split("&");
+  for (var i=0;i<vars.length;i++) {
+    var pair = vars[i].split("=");
+    if (pair[0] == variable) {
+      return pair[1];
+    }
+  }
+  alert('Query Variable ' + variable + ' not found');
 }
 
 function mainFormChanged(f) {
