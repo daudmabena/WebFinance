@@ -122,7 +122,7 @@ CurrentPDFPage=1;
 RenderPDFPage(CurrentPDFPage);
 </script>
 
-<a href="./"><h1><?=_('Incoming invoices');?></h1></a>
+<a href="./"><h1><?=_('Documents');?></h1></a>
 
 <br />
 
@@ -147,7 +147,7 @@ RenderPDFPage(CurrentPDFPage);
 
  <input id="type-unknown" type="radio" name="type" value="unknown" <?=($row['type']=='unknown'?'checked':'')?>>unknown</input>
  <input id="type-invoice" type="radio" name="type" value="invoice" <?=($row['type']=='invoice'?'checked':'')?>>invoice</input>
- <input id="type-other" type="radio" name="type" value="other" <?=($row['type']=='other'?'checked':'')?>>other</input>
+ <input id="type-document" type="radio" name="type" value="document" <?=($row['type']=='document'?'checked':'')?>>document</input>
 
 <script>
 jQuery(function(){
@@ -156,7 +156,7 @@ jQuery(function(){
           jQuery('.invoice-only').hide();
         });
 
-      jQuery('#type-other').click(function(){
+      jQuery('#type-document').click(function(){
           jQuery('.invoice-only').hide();
         });
 

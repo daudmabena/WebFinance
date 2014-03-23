@@ -609,7 +609,7 @@ CREATE TABLE IF NOT EXISTS document (
   note VARCHAR(256),
   id_user INT(11) UNSIGNED DEFAULT NULL,
   accounting ENUM('todo', 'done', 'canceled') DEFAULT 'todo',
-  type ENUM('unknown', 'invoice', 'other') DEFAULT 'unknown',
+  type ENUM('unknown', 'invoice', 'document') DEFAULT 'unknown',
   PRIMARY KEY (md5),
   KEY (provider_id),
   KEY (vat),

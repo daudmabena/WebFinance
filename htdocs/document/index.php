@@ -36,7 +36,7 @@ require("../top.php");
 <script type="text/javascript" language="javascript"
   src="/js/ask_confirmation.js"></script>
 
-<h1><?=_('Incoming invoices');?></h1>
+<h1><?=_('Documents');?></h1>
 
 <br />
 
@@ -49,12 +49,21 @@ require("../top.php");
 <br/>
 <br/>
 
-<h3>Invoices</h3>
+<h3>Documents</h3>
 
 <form>
 <table width="100%" border="1" cellspacing="0" cellpadding="5">
 
 <tr>
+
+  <th>
+<select name="type_filter" onchange="this.form.submit();">
+  <option value="none">Type</option>
+  <option value="invoice" <?=($_GET['type_filter']=='invoice'?'selected':'')?>>Invoice</option>
+  <option value="document" <?=($_GET['type_filter']=='document'?'selected':'')?>>Document</option>
+  <option value="unknown" <?=($_GET['type_filter']=='unknown'?'selected':'')?>>Unknown</option>
+</select>
+ </th>
 
  <th>
 
@@ -151,6 +160,7 @@ switch($_GET['status_filter'])
     OR d.vat IS NULL
     OR d.total_amount IS NULL
     OR d.date IS NULL
+    OR d.type = 'unknown'
   )";
     break;
 
@@ -158,6 +168,16 @@ switch($_GET['status_filter'])
   case 'paid':
   case 'unpaid':
     $where .= " AND d.paid = '$_GET[status_filter]'";
+    break;
+}
+
+# Type filter
+switch($_GET['type_filter'])
+{
+  case 'unknown':
+  case 'invoice':
+  case 'document':
+    $where .= " AND d.type = '$_GET[type_filter]'";
     break;
 }
 
@@ -196,6 +216,7 @@ SELECT
   d.paid,
   d.note,
   d.accounting,
+  d.type,
   c.nom,
   u.first_name,
   u.last_name
@@ -231,6 +252,14 @@ while($row = mysql_fetch_assoc($result))
 ?>
 
 <tr>
+ <td> <?
+   if($row['type']=='unknown')
+     echo '<img src="/imgs/icons/warning.png" title="Unknown type">';
+  else
+    echo $row['type'];
+  ?>
+ </td>
+
  <td>
    <img src="/imgs/icons/<?=$status_icon?>" title="Paid status: <?=$row[paid]?>">
    <a href="edit.php?md5=<?=$row[md5]?>"><img src="/imgs/icons/edit.png" border="0" title="Edit invoice"></a>
@@ -245,11 +274,23 @@ while($row = mysql_fetch_assoc($result))
  </td>
 
  <td align="right">
-   <?=(empty($row['total_amount'])?'<img src="/imgs/icons/warning.png" title="No total amount specified"/>':"$row[total_amount]$row[currency]")?>
+   <?
+   if($row['type']=='invoice')
+     if(empty($row['total_amount']))
+       echo '<img src="/imgs/icons/warning.png" title="No total amount specified"/>';
+     else
+       echo "$row[total_amount]$row[currency]";
+  ?>
  </td>
 
  <td align="right">
-   <?=(empty($row['vat'])?'<img src="/imgs/icons/warning.png" title="No VAT specified"/>':"$row[vat]$row[currency]")?>
+   <?
+   if($row['type']=='invoice')
+     if (empty($row['vat']))
+       echo '<img src="/imgs/icons/warning.png" title="No VAT specified"/>';
+     else
+       echo "$row[vat]$row[currency]";
+  ?>
  </td>
 
  <td>
@@ -257,7 +298,14 @@ while($row = mysql_fetch_assoc($result))
  </td>
 
  <td>
-   <?=(empty($accounting_icon) ? $row['accounting'] : "<img src=\"/imgs/icons/$accounting_icon\" title=\"Accounting status: $row[accounting]\"/>") ?>
+   <?
+   if($row['type']=='invoice')
+
+     if (empty($accounting_icon))
+       echo $row['accounting'];
+     else
+       echo "<img src=\"/imgs/icons/$accounting_icon\" title=\"Accounting status: $row[accounting]\"/>";
+  ?>
  </td>
 
  <td>
