@@ -52,7 +52,7 @@ require("../top.php");
 <h3>Documents</h3>
 
 <form>
-<table width="100%" border="1" cellspacing="0" cellpadding="5">
+<table border="1" cellspacing="0" cellpadding="5">
 
 <tr>
 
@@ -229,6 +229,7 @@ ORDER BY d.date DESC";
 $result = mysql_query($q)
   or die(mysql_error() . ' ' . $q);
 
+$i = 0;
 while($row = mysql_fetch_assoc($result))
 {
 
@@ -249,9 +250,11 @@ while($row = mysql_fetch_assoc($result))
   if(isset($accounting2icon[$row['accounting']]))
     $accounting_icon = $accounting2icon[$row['accounting']];
 
+  $class = ($i++ % 2 ?'row_even':'row_odd');
+
 ?>
 
-<tr>
+<tr class="<?=$class?>">
  <td> <?
    if($row['type']=='unknown')
      echo '<img src="/imgs/icons/warning.png" title="Unknown type">';
