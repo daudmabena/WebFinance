@@ -182,7 +182,7 @@ jQuery(function(){
   </tr>
 
   <tr>
-   <td> Provider </td>
+   <td> Sender </td>
    <td>
     <select name="provider_id">
      <option value=""></option>
