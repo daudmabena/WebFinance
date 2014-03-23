@@ -57,6 +57,7 @@ SELECT
   ii.paid,
   ii.note,
   ii.accounting,
+  ii.type,
   c.nom
 FROM incoming_invoice ii
 LEFT OUTER JOIN webfinance_clients c ON ii.provider_id = c.id_client
@@ -140,6 +141,36 @@ RenderPDFPage(CurrentPDFPage);
  <input type="hidden" name="md5" value="<?=$_GET[md5]?>" />
 
   <tr>
+   <td> Type </td>
+
+   <td>
+
+ <input id="type-unknown" type="radio" name="type" value="unknown" <?=($row['type']=='unknown'?'checked':'')?>>unknown</input>
+ <input id="type-invoice" type="radio" name="type" value="invoice" <?=($row['type']=='invoice'?'checked':'')?>>invoice</input>
+ <input id="type-other" type="radio" name="type" value="other" <?=($row['type']=='other'?'checked':'')?>>other</input>
+
+<script>
+jQuery(function(){
+
+      jQuery('#type-unknown').click(function(){
+          jQuery('.invoice-only').hide();
+        });
+
+      jQuery('#type-other').click(function(){
+          jQuery('.invoice-only').hide();
+        });
+
+      jQuery('#type-invoice').click(function(){
+          jQuery('.invoice-only').show();
+        });
+    });
+</script>
+
+</td>
+
+  </tr>
+
+  <tr class="invoice-only">
    <td> Paid </td>
    <td>
 
@@ -187,7 +218,7 @@ while($row_provider = mysql_fetch_assoc($result_provider))
    <td> <input name="date" size="10" value="<?=$row['date']?>" type="text" id="datepicker"/> </td>
   </tr>
 
-  <tr>
+  <tr class="invoice-only">
    <td> Total amount </td>
    <td> <input name="total_amount" size="8" value="<?=$row[total_amount]?>" type="text"/>
      <select name="currency" onchange="document.getElementById('currency').innerHTML=value;">
@@ -197,7 +228,7 @@ while($row_provider = mysql_fetch_assoc($result_provider))
  </td>
   </tr>
 
-  <tr>
+  <tr class="invoice-only">
    <td> VAT </td>
    <td>
   <input name="vat" size="5" value="<?=$row[vat]?>" type="text"/> <div id="currency" style="display:inline"><?=$row['currency']?></div>
@@ -210,7 +241,7 @@ while($row_provider = mysql_fetch_assoc($result_provider))
   </tr>
 
 
-  <tr>
+  <tr class="invoice-only">
    <td> Accounting </td>
    <td>
 
@@ -246,6 +277,15 @@ while($row_provider = mysql_fetch_assoc($result_provider))
 </td>
 </tr>
 </table>
+
+<script>
+  type='<?=$row['type']?>';
+
+if(type == 'invoice')
+  jQuery('.invoice-only').show();
+else
+  jQuery('.invoice-only').hide();
+</script>
 
 <?
 require("../bottom.php");
