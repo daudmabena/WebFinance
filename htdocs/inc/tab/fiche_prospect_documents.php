@@ -25,65 +25,12 @@ $document = new WebfinanceDocument;
   src="/js/ask_confirmation.js"></script>
 
 <br/>
-    <div style="overflow: auto; height: 500px;">
-    <table border="0" cellspacing="0" cellpadding="1">
-
-<tr>
-   <td style="border-bottom: solid 1px #777;" colspan="4">
-          <b style="font-size: 16px;">Incoming invoices</b>
-   </td>
-</tr>
-
-<tr class="facture_line" valign="middle">
-    <td> <a href="/document/?provider_id_filter=<?=$_GET[id]?>">Incoming&nbsp;invoices</a> </td>
-</tr>
-
-
-<tr>
-   <td style="border-bottom: solid 1px #777;" colspan="4">
-          <b style="font-size: 16px;">Documents</b>
-   </td>
-</tr>
-
-<?php
-foreach($document->ListByCompany($_GET['id']) as $filename => $file)
-{
-?>
-
-<tr class="facture_line" valign="middle">
-    <td nowrap><?=date('Y-m-d', $file['mtime'])?></td>
-    <td nowrap><?=round($file['size']/1024)?>kB</td>
- <td nowrap><?=wordwrap($filename, 80, "<br />\n");?></td>
-
- <td style="text-align: right;" nowrap><a href="/prospection/document/download.php?company_id=<?=$_GET[id]?>&file=<?=urlencode($filename)?>"><img src="/imgs/icons/pdf.png" border="0"></a><a href="/prospection/document/delete.php?company_id=<?=$_GET[id]?>&filename=<?=urlencode($filename)?>" onclick="return ask_confirmation('Are you sure you want to delete this file?')"><img src="/imgs/icons/delete.png" border="0"></a></td>
-</tr>
+    <div style="overflow: auto;">
 
 <?
-}
-?>
+    if(!isset($_GET['provider_id_filter']))
+      $_GET['provider_id_filter'] = $_GET['id'];
 
- </table>
-
-<br/>
-<br/>
-
- <table border="0" cellspacing="0" cellpadding="1">
-<tr>
-   <td style="border-bottom: solid 1px #777;">
-          <b style="font-size: 16px;">Upload</b>
-   </td>
-</tr>
-<tr>
-  <td>
-     <form method="POST" action="/prospection/document/upload.php"
-       enctype="multipart/form-data">
-       <input type="file" name="file" />
-       <input type="hidden" name="company_id" value="<?=$_GET[id]?>" />
-       <input type="submit" name="upload" value="Upload"/>
-     </form>
-  </td>
-</tr>
- </table>
-
+    require('../document/index.php'); ?>
 
 </div>

@@ -19,7 +19,7 @@
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-require("../inc/main.php");
+require_once("../inc/main.php");
 
 $User = new User();
 if(!$User->isAuthorized("manager,accounting,employee")){
@@ -29,7 +29,7 @@ if(!$User->isAuthorized("manager,accounting,employee")){
 }
 
 $roles = 'manager,employee';
-require("../top.php");
+require_once("../top.php");
 
 ?>
 
@@ -41,8 +41,9 @@ require("../top.php");
 <br />
 
 <h3>Upload</h3>
-<form method="POST" action="upload.php" enctype="multipart/form-data">
+<form method="POST" action="/document/upload.php" enctype="multipart/form-data">
   <input type="file" name="file" />
+  <input type="hidden" name="provider_id" value="<?=$_GET[id]?>" />
   <input type="submit" name="upload" value="Upload" title="Supported extensions: PDF, ZIP"/>
 </form>
 
@@ -52,6 +53,10 @@ require("../top.php");
 <h3>Documents</h3>
 
 <form>
+
+<input type="hidden" name="id" value="<?=$_GET[id]?>" />
+<input type="hidden" name="onglet" value="documents" />
+
 <table border="1" cellspacing="0" cellpadding="5">
 
 <tr>
@@ -265,7 +270,7 @@ while($row = mysql_fetch_assoc($result))
 
  <td>
    <img src="/imgs/icons/<?=$status_icon?>" title="Paid status: <?=$row[paid]?>">
-   <a href="edit.php?md5=<?=$row[md5]?>"><img src="/imgs/icons/edit.png" border="0" title="Edit invoice"></a>
+   <a href="/document/edit.php?md5=<?=$row[md5]?>&provider_id_filter=<?=$_GET[provider_id_filter]?>"><img src="/imgs/icons/edit.png" border="0" title="Edit invoice"></a>
  </td>
 
  <td>
@@ -322,8 +327,3 @@ while($row = mysql_fetch_assoc($result))
 
 </table>
 </form>
-
-<?
-require("../bottom.php");
-
-?>

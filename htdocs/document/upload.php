@@ -40,11 +40,16 @@ function upload_file($file = '', $filename = '')
     return FALSE;
   }
 
+  $provider_id = 'NULL';
+  if(!empty($_POST['provider_id']))
+    $provider_id = mysql_real_escape_string($_POST['provider_id']);
+
   $note = mysql_real_escape_string($filename);
-  mysql_query("INSERT INTO document
-SET md5='$md5',
-  note='$note',
-  id_user=$_SESSION[id_user]")
+  mysql_query("INSERT INTO document SET
+  md5         = '$md5',
+  note        = '$note',
+  provider_id = $provider_id,
+  id_user     = $_SESSION[id_user]")
     or die(mysql_error());
 
   // Move the uploaded file to the final destination
@@ -123,6 +128,11 @@ switch($file_extension)
     break;
 }
 
+if(empty($_POST['provider_id']))
+  echo '<a href="./">done</a>';
+else
+  echo "<a href=\"/prospection/fiche_prospect.php?id=$_POST[provider_id]&onglet=documents\">done</a>";
+
 ?>
 
-<a href="./">done</a>
+

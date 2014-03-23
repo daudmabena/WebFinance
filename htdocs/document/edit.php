@@ -139,6 +139,7 @@ RenderPDFPage(CurrentPDFPage);
   <a href="delete.php?md5=<?=$_GET[md5]?>" onclick="return ask_confirmation('Are you sure?')"><img src="/imgs/icons/delete.png" border="0"></a>
 
  <input type="hidden" name="md5" value="<?=$_GET[md5]?>" />
+ <input type="hidden" name="provider_id_filter" value="<?=$_GET[provider_id_filter]?>" />
 
   <tr>
    <td> Type </td>
@@ -254,11 +255,7 @@ while($row_provider = mysql_fetch_assoc($result_provider))
 
 <tr>
   <td> </td>
-  <td>
-    <input type="submit" name="action" value="Save and auto-advance" title="Save this invoice and go to the next invoice that needs information"/>
-    <br/>
-    <input type="submit" name="action" value="Save"/>
-  </td>
+  <td> <input type="submit" name="action" value="Save"/> </td>
 </tr>
 
 </table>

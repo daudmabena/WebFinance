@@ -86,37 +86,13 @@ WHERE md5     = '$_POST[md5]'";
 $result = mysql_query($q)
   or die(mysql_error() . ' ' . $q);
 
-switch($_POST['action'])
+if(empty($_POST['provider_id_filter']))
 {
-  case 'Save':
-    header('Location: ./');
-    exit;
-
-  case 'Save and auto-advance':
-    $q = "
-SELECT md5
-FROM document
-WHERE paid = 'unknown'
-  OR date IS NULL
-  OR provider_id IS NULL
-  OR vat IS NULL
-  OR total_amount IS NULL
-  OR accounting = 'todo'
-LIMIT 1
-";
-
-    $result = mysql_query($q)
-      or die(mysql_error() . ' ' . $q);
-
-    if(mysql_num_rows($result) != 1)
-    {
-      header('Location: ./');
-      exit;
-    }
-
-    $row = mysql_fetch_assoc($result);
-    header("Location: edit.php?md5=$row[md5]");
-    exit;
+  header('Location: ./');
+  exit;
 }
+
+header("Location: /prospection/fiche_prospect.php?id=$_POST[provider_id_filter]&onglet=documents");
+exit;
 
 ?>
