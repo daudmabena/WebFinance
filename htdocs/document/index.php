@@ -147,17 +147,17 @@ switch($_GET['status_filter'])
   # Show invoices with missing information
   case 'missing_information':
     $where .= " AND
-  (ii.provider_id IS NULL
-    OR ii.vat IS NULL
-    OR ii.total_amount IS NULL
-    OR ii.date IS NULL
+  (d.provider_id IS NULL
+    OR d.vat IS NULL
+    OR d.total_amount IS NULL
+    OR d.date IS NULL
   )";
     break;
 
   case 'unknown':
   case 'paid':
   case 'unpaid':
-    $where .= " AND ii.paid = '$_GET[status_filter]'";
+    $where .= " AND d.paid = '$_GET[status_filter]'";
     break;
 }
 
@@ -167,7 +167,7 @@ switch($_GET['accounting_filter'])
   case 'todo':
   case 'done':
   case 'canceled':
-    $where .= " AND ii.accounting = '$_GET[accounting_filter]'";
+    $where .= " AND d.accounting = '$_GET[accounting_filter]'";
     break;
 }
 
@@ -175,35 +175,35 @@ switch($_GET['accounting_filter'])
 if(isset($_GET['date_filter']) and $_GET['date_filter'] != 'none')
 {
   $_GET['date_filter'] = mysql_real_escape_string($_GET['date_filter']);
-  $where .= " AND ii.date BETWEEN '$_GET[date_filter]-01' AND '$_GET[date_filter]-31'";
+  $where .= " AND d.date BETWEEN '$_GET[date_filter]-01' AND '$_GET[date_filter]-31'";
 }
 
 # Provider filter
 if(isset($_GET['provider_id_filter']) and $_GET['provider_id_filter'] != 'all')
 {
   $_GET['provider_id_filter'] = mysql_real_escape_string($_GET['provider_id_filter']);
-  $where .= " AND ii.provider_id = $_GET[provider_id_filter]";
+  $where .= " AND d.provider_id = $_GET[provider_id_filter]";
 }
 
 $q = "
 SELECT
-  ii.md5,
-  ii.provider_id,
-  ii.vat,
-  ii.total_amount,
-  ii.currency,
-  ii.date,
-  ii.paid,
-  ii.note,
-  ii.accounting,
+  d.md5,
+  d.provider_id,
+  d.vat,
+  d.total_amount,
+  d.currency,
+  d.date,
+  d.paid,
+  d.note,
+  d.accounting,
   c.nom,
   u.first_name,
   u.last_name
-FROM incoming_invoice ii
-JOIN webfinance_users u ON u.id_user = ii.id_user
-LEFT OUTER JOIN webfinance_clients c ON ii.provider_id = c.id_client
+FROM document d
+JOIN webfinance_users u ON u.id_user = d.id_user
+LEFT OUTER JOIN webfinance_clients c ON d.provider_id = c.id_client
 $where
-ORDER BY ii.date DESC";
+ORDER BY d.date DESC";
 
 $result = mysql_query($q)
   or die(mysql_error() . ' ' . $q);

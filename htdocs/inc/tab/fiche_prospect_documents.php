@@ -35,7 +35,7 @@ $document = new WebfinanceDocument;
 </tr>
 
 <tr class="facture_line" valign="middle">
-    <td> <a href="/incoming_invoice/?provider_id_filter=<?=$_GET[id]?>">Incoming&nbsp;invoices</a> </td>
+    <td> <a href="/document/?provider_id_filter=<?=$_GET[id]?>">Incoming&nbsp;invoices</a> </td>
 </tr>
 
 

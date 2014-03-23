@@ -49,19 +49,19 @@ $_GET['md5'] = mysql_real_escape_string($_GET['md5']);
 
 $q = "
 SELECT
-  ii.provider_id,
-  ii.vat,
-  ii.total_amount,
-  ii.currency,
-  ii.date,
-  ii.paid,
-  ii.note,
-  ii.accounting,
-  ii.type,
+  d.provider_id,
+  d.vat,
+  d.total_amount,
+  d.currency,
+  d.date,
+  d.paid,
+  d.note,
+  d.accounting,
+  d.type,
   c.nom
-FROM incoming_invoice ii
-LEFT OUTER JOIN webfinance_clients c ON ii.provider_id = c.id_client
-WHERE ii.md5 = '$_GET[md5]'";
+FROM document d
+LEFT OUTER JOIN webfinance_clients c ON d.provider_id = c.id_client
+WHERE d.md5 = '$_GET[md5]'";
 
 $result = mysql_query($q)
   or die(mysql_error() . ' ' . $q);

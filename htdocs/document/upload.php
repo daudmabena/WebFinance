@@ -24,7 +24,7 @@ function upload_file($file = '', $filename = '')
   // Calculate MD5
   $md5 = md5_file($file);
 
-  $destination_file = rtrim('../../incoming_invoice/' . chunk_split($md5, 4, '/'), '/');
+  $destination_file = rtrim('../../document/' . chunk_split($md5, 4, '/'), '/');
 
   // Create directory
   $cmd = "mkdir -p " . dirname($destination_file);
@@ -41,7 +41,7 @@ function upload_file($file = '', $filename = '')
   }
 
   $note = mysql_real_escape_string($filename);
-  mysql_query("INSERT INTO incoming_invoice
+  mysql_query("INSERT INTO document
 SET md5='$md5',
   note='$note',
   id_user=$_SESSION[id_user]")

@@ -598,7 +598,7 @@ CREATE TABLE IF NOT EXISTS `mantis_custom_field2price` (
   UNIQUE KEY `name_value` (`custom_field_name`, `custom_field_value`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS incoming_invoice (
+CREATE TABLE IF NOT EXISTS document (
   md5 CHAR(32) NOT NULL,
   provider_id INT(11) UNSIGNED DEFAULT NULL,
   vat DECIMAL(14,2) UNSIGNED DEFAULT NULL,

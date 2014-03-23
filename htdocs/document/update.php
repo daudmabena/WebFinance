@@ -70,7 +70,7 @@ else
   $_POST['date'] = "'$_POST[date]'";  
 
 $q = "
-UPDATE incoming_invoice
+UPDATE document
 SET
  paid         = '$_POST[paid]',
  date         = $_POST[date],
@@ -95,7 +95,7 @@ switch($_POST['action'])
   case 'Save and auto-advance':
     $q = "
 SELECT md5
-FROM incoming_invoice
+FROM document
 WHERE paid = 'unknown'
   OR date IS NULL
   OR provider_id IS NULL

@@ -1,6 +1,6 @@
 <?php
 /*
- Copyright (C) 2014 NBI SARL, ISVTEC SARL
+ Copyright (C) 2004-2012 NBI SARL, ISVTEC SARL
 
    This file is part of Webfinance.
 
@@ -19,33 +19,30 @@
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-require("../inc/main.php");
+require_once("../inc/main.php");
 
 $User = new User();
+$document = new WebfinanceDocument;
+
 if(!$User->isAuthorized("manager,accounting,employee")){
   $_SESSION['came_from'] = $_SERVER['REQUEST_URI'];
   header("Location: /login.php");
   exit;
 }
 
-$roles = 'manager,employee';
-
 CybPHP_Validate::ValidateMD5($_GET['md5']);
 
-$_GET['md5'] = mysql_real_escape_string($_GET['md5']);
+$file = rtrim('../../document/' . chunk_split($_GET['md5'], 4, '/'), '/');
 
-$q = "DELETE FROM incoming_invoice
-WHERE md5='$_GET[md5]'";
+$fp = fopen($file, 'r')
+  or die("Unable to open $file");
 
-mysql_query($q)
-  or die(mysql_error() . ' ' . $q);
+header("Content-Type: application/pdf");
+header("Content-Length: " . filesize($file));
+header("Content-Disposition: attachment; filename=$_GET[md5].pdf");
 
-if(mysql_affected_rows() != 1)
-  die('Invalid MD5');
-
-unlink(rtrim('../../incoming_invoice/' . chunk_split($_GET['md5'], 4, '/'), '/'));
-
-header('Location: ./');
+fpassthru($fp);
+fclose($fp);
 exit;
 
 ?>
