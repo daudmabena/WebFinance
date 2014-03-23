@@ -94,7 +94,7 @@ for($y=2020; $y>=2009; $y--) {
  <th>
 
 <select name="provider_id_filter" onchange="this.form.submit();">>
-  <option value="all">Providers</option>
+  <option value="all">Sender</option>
 
 <?
 $q = '
@@ -151,7 +151,6 @@ switch($_GET['status_filter'])
     OR ii.vat IS NULL
     OR ii.total_amount IS NULL
     OR ii.date IS NULL
-    OR ii.accounting = 'todo'
   )";
     break;
 
