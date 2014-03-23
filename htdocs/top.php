@@ -80,7 +80,7 @@ $search_button_on = '/imgs/boutons/'.urlencode(_('Search')."_on_".$User->prefs->
 
 <body>
 
-<table border="0" cellspacing="10" cellpadding="0" style="height: 100%">
+<table width="100%" border="0" cellspacing="10" cellpadding="0" style="height: 100%">
 <tr>
   <td style="text-align: center" width=150 valign=top>
   <? include(getWFDirectory()."nav.php"); ?>

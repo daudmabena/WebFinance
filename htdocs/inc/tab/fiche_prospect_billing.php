@@ -26,7 +26,7 @@ global $Client, $User;
 <br/>
 
     <div>
-    <table width=100% border=0 cellspacing=0 cellpadding=1>
+    <table border="0" cellspacing="0" cellpadding="1">
       <?php
         // Affichage des factures existantes pour ce client
         // Affichage par année, avec une séparation lisible
@@ -87,7 +87,8 @@ global $Client, $User;
              if ($facture->period !== 'none')
                $icon_period = $facture->period;
 
-             printf('<tr class="facture_line" onMouseOut="UnTip();" onmouseover="Tip(\'%s\');" valign=middle>
+             $class = ($count % 2 ?'row_even':'row_odd');
+             printf('<tr class="'.$class.'" onMouseOut="UnTip();" onmouseover="Tip(\'%s\');" valign=middle>
                        <td nowrap>%s</td>
                        <td style="text-align:left"><b>%s</b>%s</td>
                        <td style="text-align:left">%s</td>

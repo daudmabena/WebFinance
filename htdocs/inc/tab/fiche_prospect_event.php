@@ -32,7 +32,7 @@
 global $Client;
 ?>
 
-<table width="100%" border="0" cellspacing="0" cellpadding="5">
+<table border="0" cellspacing="0" cellpadding="5">
 <tr class="row_header">
   <td><?=_('Hour') ?></td>
   <td><?= _('Events') ?></Td>

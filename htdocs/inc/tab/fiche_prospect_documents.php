@@ -26,7 +26,7 @@ $document = new WebfinanceDocument;
 
 <br/>
     <div style="overflow: auto; height: 500px;">
-    <table width="100%" border="0" cellspacing="0" cellpadding="1">
+    <table border="0" cellspacing="0" cellpadding="1">
 
 <tr>
    <td style="border-bottom: solid 1px #777;" colspan="4">
@@ -55,7 +55,7 @@ foreach($document->ListByCompany($_GET['id']) as $filename => $file)
     <td nowrap><?=round($file['size']/1024)?>kB</td>
  <td nowrap><?=wordwrap($filename, 80, "<br />\n");?></td>
 
- <td width="100%" style="text-align: right;" nowrap><a href="/prospection/document/download.php?company_id=<?=$_GET[id]?>&file=<?=urlencode($filename)?>"><img src="/imgs/icons/pdf.png" border="0"></a><a href="/prospection/document/delete.php?company_id=<?=$_GET[id]?>&filename=<?=urlencode($filename)?>" onclick="return ask_confirmation('Are you sure you want to delete this file?')"><img src="/imgs/icons/delete.png" border="0"></a></td>
+ <td style="text-align: right;" nowrap><a href="/prospection/document/download.php?company_id=<?=$_GET[id]?>&file=<?=urlencode($filename)?>"><img src="/imgs/icons/pdf.png" border="0"></a><a href="/prospection/document/delete.php?company_id=<?=$_GET[id]?>&filename=<?=urlencode($filename)?>" onclick="return ask_confirmation('Are you sure you want to delete this file?')"><img src="/imgs/icons/delete.png" border="0"></a></td>
 </tr>
 
 <?
@@ -67,7 +67,7 @@ foreach($document->ListByCompany($_GET['id']) as $filename => $file)
 <br/>
 <br/>
 
- <table width="100%" border="0" cellspacing="0" cellpadding="1">
+ <table border="0" cellspacing="0" cellpadding="1">
 <tr>
    <td style="border-bottom: solid 1px #777;">
           <b style="font-size: 16px;">Upload</b>

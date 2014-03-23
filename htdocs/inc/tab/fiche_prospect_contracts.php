@@ -22,7 +22,7 @@
 
 <br/>
     <div style="overflow: auto; height: 500px;">
-    <table width="100%" border="0" cellspacing="0" cellpadding="1">
+    <table border="0" cellspacing="0" cellpadding="1">
 
 <tr>
    <td style="border-bottom: solid 1px #777;" colspan="4">
