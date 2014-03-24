@@ -34,9 +34,6 @@ if (!$User->isAuthorized("admin,manager")) {
 if (isset($_GET['action']) && $_GET['action'] == "delete") {
 
   $Client = new Client($_GET['id']);
-  $document = new WebfinanceDocument;
-  $document_dir = $document->GetCompanyDirectory($_GET['id']);
-  $files = $document->ListByCompany($_GET['id']);
 
   if($Client->exists()){
 
@@ -60,12 +57,19 @@ if (isset($_GET['action']) && $_GET['action'] == "delete") {
     $User->delete($Client->id_user);
 
     # Remove each document
-    foreach($files as $filename => $file)
-      unlink("$document_dir/$filename")
-        or die("Unable to unlink $document_dir/$filename");
+    $q = mysql_query("SELECT md5 FROM document WHERE provider_id=".$_GET['id'])
+      or die(mysql_error());
 
-    rmdir($document_dir)
-      or die("Unable to remove directory $document_dir");
+    while(list($md5) = mysql_fetch_array($q) )
+    {
+      $file_name = rtrim('../../document/' . chunk_split($md5, 4, '/'), '/');
+
+      unlink("$file_name")
+        or die("Unable to unlink $file_name");
+
+      mysql_query("DELETE FROM document WHERE md5='$md5'")
+        or die(mysql_error());
+    }
 
     $_SESSION['message'] = _('The company and related objects have been deleted');
 
@@ -146,9 +150,6 @@ if(!empty($login)){
 
  }
 
-$document = new WebfinanceDocument;
-$old_document_dir = $document->GetCompanyDirectory($id_client);
-
 $q = sprintf("UPDATE webfinance_clients SET ".
 	     "nom='%s',
               addr1='%s',
@@ -211,14 +212,9 @@ $q = sprintf("UPDATE webfinance_clients SET ".
 
 mysql_query($q) or die(mysql_error());
 
-# Rename document directory if needed
-$new_document_dir = $document->GetCompanyDirectory($id_client);
-
-if($old_document_dir != $new_document_dir) {
-  rename($old_document_dir, $new_document_dir)
-    or die("Unable to rename $old_document_dir to $new_document_dir");
-
-  # Rename Mantis project
+# Rename Mantis project
+if($_POST['nom'] != $Client->nom)
+{
   $mantis_project = array(
     'name' => $nom,
     # private = 50 according to mantis/ticket/core/constant_inc.php

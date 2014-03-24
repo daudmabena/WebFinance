@@ -19,7 +19,6 @@
 
 require_once("../../inc/main.php");
 $User = new User();
-$document = new WebfinanceDocument;
 
 if(!$User->isAuthorized("manager,accounting,employee")){
   $_SESSION['came_from'] = $_SERVER['REQUEST_URI'];

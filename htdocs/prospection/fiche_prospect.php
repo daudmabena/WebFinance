@@ -60,12 +60,6 @@ if (isset($_GET['action']) && $_GET['action'] == '_new') {
   $mantis = new WebfinanceMantis;
   $mantis->createProject($_GET['id'], $mantis_project);
 
-  # Create document directory
-  $document = new WebfinanceDocument;
-  $document_dir = $document->GetCompanyDirectory($_GET['id']);
-  mkdir($document_dir)
-    or die("Unable to create directory $document_dir");
-
   $_SESSION['message']= _('New customer created');
   logmessage(_('Create customer')." client:".$_GET['id'],$_GET['id']);
 }
