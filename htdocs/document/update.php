@@ -50,6 +50,10 @@ if($_POST['vat'] == '')
 if(empty($_POST['total_amount']))
   $_POST['total_amount'] = 'NULL';
 
+# Replace French comas by international points
+$_POST['total_amount'] = str_replace(',', '.', $_POST['total_amount']);
+$_POST['vat']          = str_replace(',', '.', $_POST['vat']);
+
 # SQL escape
 foreach(array('paid',
     'date',
