@@ -20,6 +20,9 @@
 */
 
 require_once("../inc/main.php");
+require_once('WebfinancePreferences.php');
+
+$prefs = new WebfinancePreferences;
 
 $User = new User();
 if(!$User->isAuthorized("manager,accounting,employee")){
@@ -222,6 +225,7 @@ SELECT
   d.note,
   d.accounting,
   d.type,
+  d.ticket_id,
   c.nom,
   u.first_name,
   u.last_name
@@ -274,6 +278,13 @@ while($row = mysql_fetch_assoc($result))
    <?
      if($row['type']=='invoice')
        echo "<img src=\"/imgs/icons/$status_icon\" title=\"Paid status: $row[paid]\">";
+
+  if(!empty($row['ticket_id']))
+  {
+    $ticket_url = $prefs->prefs['mantis_home_url'] . 'view.php?id=' . $row['ticket_id'];
+
+    echo "<a href=\"$ticket_url\"><img src=\"/imgs/icons/notes.gif\" border=\"0\" title=\"Show ticket\"></a>";
+  }
    ?>
 
  </td>

@@ -69,6 +69,48 @@ if(empty($_POST['date']))
 else
   $_POST['date'] = "'$_POST[date]'";  
 
+# Open ticket if needed
+$ticket_id = 'NULL';
+if(!empty($_POST['open_ticket']))
+{
+  require_once('WebfinancePreferences.php');
+  require_once('WebfinanceCompany.php');
+
+  $prefs = new WebfinancePreferences;
+
+  $wsdl     = $prefs->prefs['mantis_api_url'] . '?wsdl';
+  $username = $prefs->prefs['mantis_login'];
+  $password = $prefs->prefs['mantis_password'];
+
+  $company = new WebfinanceCompany($_POST['provider_id']);
+  $company_info = $company->GetInfo();
+
+  $method = 'http://';
+  if (!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== 'off')
+    $method = 'https://';
+
+  $url = $method . $_SERVER['HTTP_HOST'] . '/document/edit.php?md5=' . $_POST['md5'];
+
+  $issue = array(
+    'summary'     => "Document $note from $company_info[name]",
+    'description' => "New document $note from $company_info[name]\n\n$url",
+    'project'     => array(
+      'id' => 381,
+    ),
+  );
+
+  try
+  {
+    $mantis = new SoapClient($wsdl);
+    $ticket_id = $mantis->mc_issue_add($username, $password, $issue);
+  }
+  catch(SoapFault $fault)
+  {
+    echo $fault;
+    exit;
+  }
+}
+
 $q = "
 UPDATE document
 SET
@@ -80,7 +122,8 @@ SET
  currency     = '$_POST[currency]',
  note         = '$_POST[note]',
  accounting   = '$_POST[accounting]',
- type         = '$_POST[type]'
+ type         = '$_POST[type]',
+ ticket_id    = $ticket_id
 WHERE md5     = '$_POST[md5]'";
 
 $result = mysql_query($q)

@@ -58,6 +58,7 @@ SELECT
   d.note,
   d.accounting,
   d.type,
+  d.ticket_id,
   c.nom
 FROM document d
 LEFT OUTER JOIN webfinance_clients c ON d.provider_id = c.id_client
@@ -137,6 +138,18 @@ RenderPDFPage(CurrentPDFPage);
   <a href="download.php?md5=<?=$_GET[md5]?>"><img src="/imgs/icons/pdf.png" border="0"></a>
   &nbsp;
   <a href="delete.php?md5=<?=$_GET[md5]?>" onclick="return ask_confirmation('Are you sure?')"><img src="/imgs/icons/delete.png" border="0"></a>
+
+<?
+  if(!empty($row['ticket_id']))
+  {
+    require_once('WebfinancePreferences.php');
+    $prefs = new WebfinancePreferences;
+
+    $ticket_url = $prefs->prefs['mantis_home_url'] . 'view.php?id=' . $row['ticket_id'];
+
+    echo "&nbsp;<a href=\"$ticket_url\"><img src=\"/imgs/icons/notes.gif\" border=\"0\" title=\"Show ticket\"></a>";
+  }
+?>
 
  <input type="hidden" name="md5" value="<?=$_GET[md5]?>" />
  <input type="hidden" name="provider_id_filter" value="<?=$_GET[provider_id_filter]?>" />
@@ -254,7 +267,13 @@ while($row_provider = mysql_fetch_assoc($result_provider))
 
 <tr>
   <td> </td>
-  <td> <input type="submit" name="action" value="Save"/> </td>
+  <td>
+  <?
+    if(empty($row['ticket_id']))
+      echo '<input type="checkbox" name="open_ticket" value="1"> Open ticket <br/>';
+  ?>
+    <input type="submit" name="action" value="Save"/>
+  </td>
 </tr>
 
 </table>

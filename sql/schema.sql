@@ -610,6 +610,7 @@ CREATE TABLE IF NOT EXISTS document (
   id_user INT(11) UNSIGNED DEFAULT NULL,
   accounting ENUM('todo', 'done', 'canceled') DEFAULT 'todo',
   type ENUM('unknown', 'invoice', 'document') DEFAULT 'unknown',
+  ticket_id INT(11) UNSIGNED DEFAULT NULL,
   PRIMARY KEY (md5),
   KEY (provider_id),
   KEY (vat),
@@ -618,5 +619,6 @@ CREATE TABLE IF NOT EXISTS document (
   KEY (note),
   KEY (id_user),
   KEY (accounting),
-  KEY (type)
+  KEY (type),
+  KEY (ticket_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
