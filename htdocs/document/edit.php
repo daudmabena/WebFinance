@@ -266,10 +266,10 @@ while($row_provider = mysql_fetch_assoc($result_provider))
 </td>
 <td>
 <p align="left" style="display:inline"><a href="#" onclick="RenderPDFPage(--CurrentPDFPage);"><<</a></p>
-<div id="page_number" style="display:inline">page 1</div>
+<div id="page_number" style="display:inline">Loading...</div>
 <p align="right" style="display:inline"><a href="#" onclick="RenderPDFPage(++CurrentPDFPage);">>></a></p>
 <br/>
-<canvas id="the-canvas" style="border:1px solid black;">Loading...</canvas>
+<canvas id="the-canvas" style="border:1px solid black;"></canvas>
 
 </td>
 </tr>
