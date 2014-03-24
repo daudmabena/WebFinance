@@ -44,7 +44,6 @@ function getQueryVariable(variable) {
       return pair[1];
     }
   }
-  alert('Query Variable ' + variable + ' not found');
 }
 
 function mainFormChanged(f) {
