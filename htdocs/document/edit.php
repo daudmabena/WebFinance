@@ -269,7 +269,7 @@ while($row_provider = mysql_fetch_assoc($result_provider))
 <div id="page_number" style="display:inline">page 1</div>
 <p align="right" style="display:inline"><a href="#" onclick="RenderPDFPage(++CurrentPDFPage);">>></a></p>
 <br/>
-<canvas id="the-canvas" style="border:1px solid black;"></canvas>
+<canvas id="the-canvas" style="border:1px solid black;">Loading...</canvas>
 
 </td>
 </tr>
