@@ -26,6 +26,9 @@ function focusOnglet(id) {
     onglet_shown = id;
   }
 
+    if(!getQueryVariable('id'))
+	return;
+
     var pageurl = '/prospection/fiche_prospect.php?id=' + getQueryVariable('id') +
 	'&onglet=' + id;
 
@@ -44,6 +47,7 @@ function getQueryVariable(variable) {
       return pair[1];
     }
   }
+  return false;
 }
 
 function mainFormChanged(f) {
