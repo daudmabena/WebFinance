@@ -238,9 +238,8 @@ while($row_provider = mysql_fetch_assoc($result_provider))
 
   <tr>
    <td> Note </td>
-   <td> <input name="note" size="80" value="<?=$row[note]?>" type="text"/> </td>
+   <td> <input name="note" size="50" value="<?=$row[note]?>" type="text"/> </td>
   </tr>
-
 
   <tr class="invoice-only">
    <td> Accounting </td>
