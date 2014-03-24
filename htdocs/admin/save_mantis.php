@@ -20,19 +20,20 @@
 require("../inc/main.php");
 must_login();
 
-if(!isset($_POST['login'], $_POST['password'], $_POST['api_url']))
+if(!isset($_POST['login'], $_POST['password'], $_POST['api_url'], $_POST['home_url']))
   exit('Missing argument');
 
 $_POST['login']    = mysql_escape_string($_POST['login']);
 $_POST['password'] = mysql_escape_string($_POST['password']);
 $_POST['api_url']  = mysql_escape_string($_POST['api_url']);
+$_POST['home_url'] = mysql_escape_string($_POST['home_url']);
 
 mysql_query('begin')
   or die(mysql_error());
 
 # Delete previous entries
 mysql_query('delete from webfinance_pref '.
-  "where type_pref in ('mantis_login', 'mantis_password', 'mantis_api_url')")
+  "where type_pref in ('mantis_login', 'mantis_password', 'mantis_api_url', 'mantis_home_url')")
   or die(mysql_error());
 
 # Set login
@@ -47,10 +48,16 @@ mysql_query('insert into webfinance_pref '.
   " value = '$_POST[password]'")
   or die(mysql_error());
 
-# Set password
+# Set API URL
 mysql_query('insert into webfinance_pref '.
   "set type_pref = 'mantis_api_url', ".
   " value = '$_POST[api_url]'")
+  or die(mysql_error());
+
+# Set home URL
+mysql_query('insert into webfinance_pref '.
+  "set type_pref = 'mantis_home_url', ".
+  " value = '$_POST[home_url]'")
   or die(mysql_error());
 
 mysql_query('commit')
