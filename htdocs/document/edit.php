@@ -184,17 +184,6 @@ jQuery(function(){
 
   </tr>
 
-  <tr class="invoice-only">
-   <td> Paid </td>
-   <td>
-
- <input type="radio" name="paid" value="unknown" <?=($row['paid']=='unknown'?'checked':'')?>>unknown</input>
- <input type="radio" name="paid" value="paid" <?=($row['paid']=='paid'?'checked':'')?>>paid</input>
- <input type="radio" name="paid" value="unpaid" <?=($row['paid']=='unpaid'?'checked':'')?>>unpaid</input>
-
-</td>
-  </tr>
-
   <tr>
    <td> Sender </td>
    <td>
@@ -230,6 +219,17 @@ while($row_provider = mysql_fetch_assoc($result_provider))
   <tr>
    <td> Date </td>
    <td> <input name="date" size="10" value="<?=$row['date']?>" type="text" id="datepicker"/> </td>
+  </tr>
+
+  <tr class="invoice-only">
+   <td> Paid </td>
+   <td>
+
+ <input type="radio" name="paid" value="unknown" <?=($row['paid']=='unknown'?'checked':'')?>>unknown</input>
+ <input type="radio" name="paid" value="paid" <?=($row['paid']=='paid'?'checked':'')?>>paid</input>
+ <input type="radio" name="paid" value="unpaid" <?=($row['paid']=='unpaid'?'checked':'')?>>unpaid</input>
+
+</td>
   </tr>
 
   <tr class="invoice-only">
