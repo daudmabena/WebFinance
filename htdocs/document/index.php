@@ -269,11 +269,13 @@ while($row = mysql_fetch_assoc($result))
  </td>
 
  <td>
+   <a href="/document/edit.php?md5=<?=$row[md5]?>&provider_id_filter=<?=$_GET[provider_id_filter]?>"><img src="/imgs/icons/edit.png" border="0" title="Edit invoice"></a>
+
    <?
      if($row['type']=='invoice')
        echo "<img src=\"/imgs/icons/$status_icon\" title=\"Paid status: $row[paid]\">";
    ?>
-   <a href="/document/edit.php?md5=<?=$row[md5]?>&provider_id_filter=<?=$_GET[provider_id_filter]?>"><img src="/imgs/icons/edit.png" border="0" title="Edit invoice"></a>
+
  </td>
 
  <td>
