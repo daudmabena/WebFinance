@@ -45,22 +45,22 @@ while ($row = mysql_fetch_assoc($res))
 
   <tr class="row_even">
    <td>Login</td>
-   <td><input type="text" name="login" value="<?=$mantis[mantis_login]?>" /></td>
+   <td><input size="100" type="text" name="login" value="<?=$mantis[mantis_login]?>" /></td>
   </tr>
 
   <tr class="row_odd">
    <td>Password</td>
-   <td><input type="password" name="password" value="<?=$mantis[mantis_password]?>" /></td>
+   <td><input size="100" type="password" name="password" value="<?=$mantis[mantis_password]?>" /></td>
   </tr>
 
   <tr class="row_even">
    <td>API URL</td>
-   <td><input type="text" name="api_url" value="<?=$mantis[mantis_api_url]?>" /></td>
+   <td><input size="100" type="text" name="api_url" value="<?=$mantis[mantis_api_url]?>" /></td>
   </tr>
 
   <tr class="row_odd">
    <td>Home URL</td>
-   <td><input type="texst" name="home_url" value="<?=$mantis[mantis_home_url]?>" /></td>
+   <td><input size="100" type="texst" name="home_url" value="<?=$mantis[mantis_home_url]?>" /></td>
   </tr>
 
 <tr class="row_even">
