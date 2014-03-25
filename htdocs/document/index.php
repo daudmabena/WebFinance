@@ -284,7 +284,21 @@ while($row = mysql_fetch_assoc($result))
  </td>
 
  <td>
-   <a href="/document/edit.php?md5=<?=$row[md5]?>&provider_id_filter=<?=$_GET[provider_id_filter]?>&status_filter=<?=$_GET[status_filter]?>&accounting_filter=<?=$_GET[accounting_filter]?>"><img src="/imgs/icons/edit.png" border="0" title="Edit invoice"></a>
+
+<?
+  $edit_url = "/document/edit.php?md5=$row[md5]";
+
+  if(!empty($_GET['provider_id_filter']))
+    $edit_url .= "&provider_id_filter=$_GET[provider_id_filter]";
+
+  if(!empty($_GET['status_filter']))
+    $edit_url .= "&status_filter=$_GET[status_filter]";
+
+  if(!empty($_GET['accounting_filter']))
+    $edit_url .= "&accounting_filter=$_GET[accounting_filter]";
+?>
+
+   <a href="<?=$edit_url?>"><img src="/imgs/icons/edit.png" border="0" title="Edit invoice"></a>
 
    <?
      if($row['type']=='invoice')
