@@ -270,7 +270,7 @@ while($row_provider = mysql_fetch_assoc($result_provider))
   <td>
   <?
     if(empty($row['ticket_id']))
-      echo '<input type="checkbox" name="open_ticket" value="1"> Open ticket <br/>';
+      echo '<input type="checkbox" name="open_ticket" value="1" checked> Open ticket <br/>';
   ?>
     <input type="submit" name="action" value="Save"/>
   </td>
