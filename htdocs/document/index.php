@@ -202,7 +202,7 @@ switch($_GET['accounting_filter'])
   case 'todo':
   case 'done':
   case 'canceled':
-    $where .= " AND d.accounting = '$_GET[accounting_filter]'";
+    $where .= " AND d.type = 'invoice' AND d.accounting = '$_GET[accounting_filter]'";
     break;
 }
 
