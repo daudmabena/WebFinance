@@ -164,12 +164,19 @@ switch($_GET['status_filter'])
   # Show invoices with missing information
   case 'missing_information':
     $where .= " AND
-  (d.provider_id IS NULL
-    OR d.vat IS NULL
-    OR d.total_amount IS NULL
+ (
+    d.provider_id IS NULL
     OR d.date IS NULL
     OR d.type = 'unknown'
-  )";
+   OR
+   (
+     d.type = 'invoice' AND
+     (
+       d.vat IS NULL
+       OR d.total_amount IS NULL
+     )
+   )
+ )";
     break;
 
   case 'unknown':
