@@ -31,7 +31,7 @@ if(!$User->isAuthorized("manager,accounting,employee")){
   exit;
 }
 
-$roles = 'manager,employee';
+$roles = 'manager,accounting,employee';
 require_once("../top.php");
 
 ?>

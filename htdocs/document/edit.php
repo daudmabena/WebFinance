@@ -40,7 +40,7 @@ array_push($extra_css, '/javascript/jquery-ui/css/smoothness/jquery-ui.css');
 # Load PDF Reader in JavaScript
 array_push($extra_js, '/javascript/pdf/pdf.js');
 
-$roles = 'manager,employee';
+$roles = 'manager,employee,accounting';
 require("../top.php");
 
 CybPHP_Validate::ValidateMD5($_GET['md5']);
