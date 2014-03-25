@@ -136,10 +136,11 @@ RenderPDFPage(CurrentPDFPage);
 <form action="update.php" method="POST">
 
   <a href="download.php?md5=<?=$_GET[md5]?>"><img src="/imgs/icons/pdf.png" border="0"></a>
-  &nbsp;
-  <a href="delete.php?md5=<?=$_GET[md5]?>" onclick="return ask_confirmation('Are you sure?')"><img src="/imgs/icons/delete.png" border="0"></a>
-
 <?
+  # Show 'delete' button to managers
+  if(in_array('manager', explode(',', $User->userData->role)))
+    echo "&nbsp; <a href=\"delete.php?md5=$_GET[md5]\" onclick=\"return ask_confirmation('Are you sure?')\"><img src=\"/imgs/icons/delete.png\" border=\"0\"></a>";
+
   if(!empty($row['ticket_id']))
   {
     require_once('WebfinancePreferences.php');
@@ -270,7 +271,13 @@ while($row_provider = mysql_fetch_assoc($result_provider))
   <td>
   <?
     if(empty($row['ticket_id']))
-      echo '<input type="checkbox" name="open_ticket" value="1" checked> Open ticket <br/>';
+    {
+      # Show 'open ticket' checkbox to managers
+      if(in_array('manager', explode(',', $User->userData->role)))
+        echo '<input type="checkbox" name="open_ticket" value="1" checked> Open ticket <br/>';
+      else
+        echo '<input type="hidden" name="open_ticket" value="0"/>';
+    }
   ?>
     <input type="submit" name="action" value="Save"/>
   </td>
