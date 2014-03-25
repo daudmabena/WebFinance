@@ -154,6 +154,8 @@ RenderPDFPage(CurrentPDFPage);
 
  <input type="hidden" name="md5" value="<?=$_GET[md5]?>" />
  <input type="hidden" name="provider_id_filter" value="<?=$_GET[provider_id_filter]?>" />
+ <input type="hidden" name="status_filter" value="<?=$_GET[status_filter]?>" />
+ <input type="hidden" name="accounting_filter" value="<?=$_GET[accounting_filter]?>" />
 
   <tr>
    <td> Type </td>

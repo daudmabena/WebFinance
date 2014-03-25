@@ -133,13 +133,17 @@ WHERE md5     = '$_POST[md5]'";
 $result = mysql_query($q)
   or die(mysql_error() . ' ' . $q);
 
-if(empty($_POST['provider_id_filter']))
-{
-  header('Location: ./');
-  exit;
-}
+$redirect_url = './?';
+if(!empty($_POST['provider_id_filter']))
+  $redirect_url = "/prospection/fiche_prospect.php?id=$_POST[provider_id_filter]&onglet=documents&";
 
-header("Location: /prospection/fiche_prospect.php?id=$_POST[provider_id_filter]&onglet=documents");
+if(!empty($_POST['status_filter']))
+  $redirect_url .= "&status_filter=$_POST[status_filter]";
+
+if(!empty($_POST['accounting_filter']))
+  $redirect_url .= "&accounting_filter=$_POST[accounting_filter]";
+
+header("Location: $redirect_url");
 exit;
 
 ?>
