@@ -274,7 +274,7 @@ while($row_provider = mysql_fetch_assoc($result_provider))
     {
       # Show 'open ticket' checkbox to managers
       if(in_array('manager', explode(',', $User->userData->role)))
-        echo '<input type="checkbox" name="open_ticket" value="1" checked> Open ticket <br/>';
+        echo '<input type="checkbox" name="open_ticket" value="1"> Open ticket <br/>';
       else
         echo '<input type="hidden" name="open_ticket" value="0"/>';
     }
