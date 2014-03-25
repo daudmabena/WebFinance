@@ -310,7 +310,16 @@ while($row = mysql_fetch_assoc($result))
      if(empty($row['total_amount']))
        echo '<img src="/imgs/icons/warning.png" title="No total amount specified"/>';
      else
-       echo "$row[total_amount]$row[currency]";
+       switch($row['currency'])
+       {
+         case '$':
+           echo "$row[currency]$row[total_amount]";
+           break;
+
+         case '€':
+           echo "$row[total_amount]&nbsp;$row[currency]";
+           break;
+       }
   ?>
  </td>
 
@@ -320,7 +329,16 @@ while($row = mysql_fetch_assoc($result))
      if (empty($row['vat']))
        echo '<img src="/imgs/icons/warning.png" title="No VAT specified"/>';
      else
-       echo "$row[vat]$row[currency]";
+       switch($row['currency'])
+       {
+         case '$':
+           echo "$row[currency]$row[vat]";
+           break;
+
+         case '€':
+           echo "$row[vat]&nbsp;$row[currency]";
+           break;
+       }
   ?>
  </td>
 
