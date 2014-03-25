@@ -55,6 +55,10 @@ require_once("../top.php");
 
 <h3>Documents</h3>
 
+  <a href="./?status_filter=missing_information">À saisir</a>,
+  <a href="./?accounting_filter=todo">à comptabiliser</a>,
+  <a href="./">tous</a> <br/>
+
 <form>
 
 <input type="hidden" name="id" value="<?=$_GET[id]?>" />
