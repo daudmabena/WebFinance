@@ -73,8 +73,21 @@ if(empty($_POST['date']))
 else
   $_POST['date'] = "'$_POST[date]'";  
 
+$query = "UPDATE document
+SET
+ paid         = '$_POST[paid]',
+ date         = $_POST[date],
+ provider_id  = $_POST[provider_id],
+ vat          = $_POST[vat],
+ total_amount = $_POST[total_amount],
+ currency     = '$_POST[currency]',
+ note         = '$_POST[note]',
+ accounting   = '$_POST[accounting]',
+ type         = '$_POST[type]'";
+
+$where = "WHERE md5 = '$_POST[md5]'";
+
 # Open ticket if needed
-$ticket_id = 'NULL';
 if(!empty($_POST['open_ticket']))
 {
   require_once('WebfinancePreferences.php');
@@ -107,6 +120,7 @@ if(!empty($_POST['open_ticket']))
   {
     $mantis = new SoapClient($wsdl);
     $ticket_id = $mantis->mc_issue_add($username, $password, $issue);
+    $query .= ", ticket_id    = $ticket_id";
   }
   catch(SoapFault $fault)
   {
@@ -115,20 +129,7 @@ if(!empty($_POST['open_ticket']))
   }
 }
 
-$q = "
-UPDATE document
-SET
- paid         = '$_POST[paid]',
- date         = $_POST[date],
- provider_id  = $_POST[provider_id],
- vat          = $_POST[vat],
- total_amount = $_POST[total_amount],
- currency     = '$_POST[currency]',
- note         = '$_POST[note]',
- accounting   = '$_POST[accounting]',
- type         = '$_POST[type]',
- ticket_id    = $ticket_id
-WHERE md5     = '$_POST[md5]'";
+$q = "$query $where";
 
 $result = mysql_query($q)
   or die(mysql_error() . ' ' . $q);
