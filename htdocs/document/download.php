@@ -40,6 +40,13 @@ header("Content-Type: application/pdf");
 header("Content-Length: " . filesize($file));
 header("Content-Disposition: attachment; filename=$_GET[md5].pdf");
 
+// Tell the browser to keep our document in cache for 1 year
+// seconds, minutes, hours, days
+$expires = 60*60*24*365;
+header("Pragma: public");
+header("Cache-Control: maxage=".$expires);
+header('Expires: ' . gmdate('D, d M Y H:i:s', time()+$expires) . ' GMT');
+
 fpassthru($fp);
 fclose($fp);
 exit;
