@@ -19,16 +19,6 @@
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 ?>
-<?php
-//
-// This file is part of « Webfinance »
-//
-// Copyright (c) 2004-2006 NBI SARL
-// Author : Nicolas Bouthors <nbouthors@nbi.fr>
-//
-// You can use and redistribute this file under the term of the GNU GPL v2.0
-//
-?>
 <div style="overflow: auto; height: 300px;">
 <table width="100%" border="0" cellspacing="0" cellpadding="2">
   <?php
