@@ -104,7 +104,6 @@ if(!$User->isAuthorized("manager,accounting,employee")){
 if(!isset($_FILES['file']['name']))
   die('Too few argument. PHP upload limit reached?');
 
-CybPHP_Validate::ValidateFileName($_FILES['file']['name']);
 CybPHP_Validate::ValidateInt($_SESSION['id_user']);
 
 if($_FILES['file']['error'] !== 0)
