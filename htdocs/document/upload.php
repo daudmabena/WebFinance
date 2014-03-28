@@ -24,7 +24,7 @@ function upload_file($file = '', $filename = '')
   // Calculate MD5
   $md5 = md5_file($file);
 
-  $destination_file = rtrim('../../document/' . chunk_split($md5, 4, '/'), '/');
+  $destination_file = '../../document/' . rtrim(chunk_split($md5, 4, '/'), '/');
 
   // Create directory
   $cmd = "mkdir -p " . dirname($destination_file);
