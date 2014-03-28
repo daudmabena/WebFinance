@@ -18,6 +18,18 @@
     along with Webfinance; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+
+// Format phone numbers according to https://en.wikipedia.org/wiki/National_conventions_for_writing_telephone_numbers
+function phone_number_format($number = '')
+{
+  // France
+  if (preg_match('/\+33(\d{1})(\d{2})(\d{2})(\d{2})(\d{2})$/', $number, $matches))
+    return "+33 $matches[1] $matches[2] $matches[3] $matches[4] $matches[5]";
+
+  // Generic
+  return rtrim(chunk_split($number, 2, '-'), '-');
+}
+
 ?>
 <div style="overflow: auto; height: 300px;">
 <table width="100%" border="0" cellspacing="0" cellpadding="2">
@@ -30,8 +42,8 @@
     $contact->note = preg_replace("!\r\n!", "<br/>", $contact->note );
     $class = ($count%2 == 0)?"odd":"even";
     if ($contact->email != "") $mail = sprintf('<a href="mailto:%s"><img class="icon" src="/imgs/icons/mail.gif" alt="%s" /></a>', $contact->email, $contact->email ); else $mail = "";
-    if ($contact->tel != "") $tel = sprintf('<img style="vertical-align: middle;" src="/imgs/icons/tel.gif" alt="Tel" />&nbsp;%s<br/>', $contact->tel); else $tel = "";
-    if ($contact->mobile != "") $mobile = sprintf('<img style="vertical-align: middle;" src="/imgs/icons/gsm.gif" alt="GSM" />&nbsp;%s<br/>', $contact->mobile); else $mobile = "";
+    if ($contact->tel != "") $tel = sprintf('<img style="vertical-align: middle;" src="/imgs/icons/tel.gif" alt="Tel" />&nbsp;%s<br/>', phone_number_format($contact->tel)); else $tel = "";
+    if ($contact->mobile != "") $mobile = sprintf('<img style="vertical-align: middle;" src="/imgs/icons/gsm.gif" alt="GSM" />&nbsp;%s<br/>', phone_number_format($contact->mobile)); else $mobile = "";
     if ($contact->note != "") $note = sprintf('<img style="vertical-align: middle;" src="/imgs/icons/notes.gif" onMouseOut="UnTip();" onmouseover="Tip(\'%s\')"/>', addslashes($contact->note)); else $note = "";
     $c_mobile	= urlencode(format_phone($mobile));
 	$c_tel		= urlencode(format_phone($tel));
