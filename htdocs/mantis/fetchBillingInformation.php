@@ -191,9 +191,11 @@ for($i=2040; $i>=2009; $i--) {
                   "<td align=\"right\"><b>$total_time_client_human_readable</b></td> ".
                   "<td align=\"right\"><b>$total_price_client&euro;</b></td>\n";
 
+                // Skip invoice if client is in $clients_not_invoiced
                 if(isset($clients_not_invoiced[$ticket['id_client']]))
                   $invoiced = 'whitelist';
 
+                // Skip invoice if the company is not a client: supplier, prospect, etc.
                 if($client->type_name != 'Client')
                   $invoiced = 'not a client';
 
@@ -218,12 +220,12 @@ for($i=2040; $i>=2009; $i--) {
                   $mantis->sendReportByEmail($year, $month, $webfinance_id)
                     or die("Unable to send report for client ID $webfinance_id");
 
-                  // Skip invoice if client is in $clients_not_invoiced
-                  if(isset($clients_not_invoiced[$ticket['id_client']]))
-                    {
+                  // Skip invoice if needed
+                  if($invoiced !== TRUE)
+                  {
                       echo "</b></td></tr>\n";
                       continue;
-                    }
+                  }
 
                   // Create and send invoice by email
                     if($mantis->createAndSendInvoice(
