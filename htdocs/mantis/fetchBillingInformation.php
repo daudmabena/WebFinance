@@ -108,6 +108,7 @@ for($i=2040; $i>=2009; $i--) {
 	// Print preview
 	foreach($mantis->fetchBillingInformation($year, $month)
           as $webfinance_id => $billing) {
+          $invoiced = TRUE;
 
           $url_webfinance = "/prospection/fiche_prospect.php?id=$webfinance_id";
 
@@ -190,18 +191,23 @@ for($i=2040; $i>=2009; $i--) {
                   "<td align=\"right\"><b>$total_time_client_human_readable</b></td> ".
                   "<td align=\"right\"><b>$total_price_client&euro;</b></td>\n";
 
-
                 if(isset($clients_not_invoiced[$ticket['id_client']]))
-                {
-                  echo "<td bgcolor=\"red\">NOT INVOICED</td>\n";
-                  $total_minutes_all_clients_not_invoiced += $total_minutes_client;
-                  $total_price_all_clients_not_invoiced += $total_price_client;
-                }
-                else
+                  $invoiced = 'whitelist';
+
+                if($client->type_name != 'Client')
+                  $invoiced = 'not a client';
+
+                if($invoiced === TRUE)
                 {
                   $total_minutes_all_clients += $total_minutes_client;
                   $total_price_all_clients += $total_price_client;
                   echo "<td></td>\n";
+                }
+                else
+                {
+                  echo "<td bgcolor=\"red\">NOT INVOICED $invoiced</td>\n";
+                  $total_minutes_all_clients_not_invoiced += $total_minutes_client;
+                  $total_price_all_clients_not_invoiced += $total_price_client;
                 }
 
                 echo "<td align=\"right\"><a href=\"report.php?id_client=$ticket[id_client]&year=$year&month=$month\">Rapport</a> <b>";
