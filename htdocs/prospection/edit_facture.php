@@ -42,7 +42,7 @@ list($currency,$exchange) = getCurrency($facture->id_compte);
 
 $title = $facture->nom_client;
 
-$roles = 'manager,employee';
+$roles = 'manager,employee,accounting';
 include("../top.php");
 include("nav.php");
 ?>
