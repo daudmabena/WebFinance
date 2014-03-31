@@ -276,7 +276,7 @@ class WebfinanceMantis {
                   or die(mysql_error());
                 list($id_type_presta) = mysql_fetch_row($result);
 
-		// Input facture paremeters
+		// Input facture parameters
 		mysql_query("UPDATE webfinance_invoices SET
 		        is_paye = 0,
 		        is_envoye = 0,
