@@ -134,9 +134,8 @@ for($i=2040; $i>=2009; $i--) {
 
                         # Define background color based on invoice
                         $color='white';
-                        if(isset($ticket['invoiced']) and !$ticket['invoiced']) {
+                        if(isset($ticket['invoiced']) and !$ticket['invoiced'])
                           $color='red';
-                        }
 
                         echo "<tr>\n  <td bgcolor=\"$color\"> $ticket[support_type] </td>\n";
                         echo "  <td> $ticket[mantis_project_name] ";
