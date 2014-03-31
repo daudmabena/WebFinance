@@ -102,6 +102,7 @@ CREATE TABLE IF NOT EXISTS `webfinance_clients` (
   `id_contract_signer_role` int(11),
   `iban` varchar(100) DEFAULT NULL,
   `bic` varchar(100) DEFAULT NULL,
+  `vat` DECIMAL(14,2) UNSIGNED DEFAULT '20.0',
   PRIMARY KEY (`id_client`),
   UNIQUE KEY `nom` (`nom`),
   KEY `id_user` (`id_user`)

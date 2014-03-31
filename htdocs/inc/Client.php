@@ -68,6 +68,7 @@ class Client extends WFO
   c.id_mantis,
   c.language,
   c.contract_signer,
+  c.vat,
   ct.nom as type_name,
   be.name AS business_entity,
   csr.role AS contract_signer_role,

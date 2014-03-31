@@ -871,16 +871,16 @@ INSERT INTO webfinance_invoice_rows
   function create(array $invoice = array()) {
     $InvoiceNumber = self::generateInvoiceNumber();
 
-    $vat = getTVA();
-
     if(empty($invoice['client_id']))
       die('Unable to create invoice: $invoice[client_id] not defined');
+
+    $Client = new Client($invoice['client_id']);
 
     mysql_query('INSERT INTO webfinance_invoices '.
       'SET date_created = NOW(), '.
       '    date_facture = NOW(), '.
       "    id_client    = $invoice[client_id], ".
-      "    tax          = $vat, " .
+      "    tax          = $Client->vat, " .
       "    num_facture  = $InvoiceNumber")
       or die(mysql_error());
 

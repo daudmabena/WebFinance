@@ -43,6 +43,11 @@ global $Client, $User;
   <input type="text" name="pays" value="<?= preg_replace('/"/', '\\"', $Client->pays) ?>" style="color: #666; width: 80px; text-align: center;" />Lang: <select name="clt_language"><option value='fr_FR' <? if($Client->language == 'fr_FR') { ?>selected <? } ?>>French</option><option value='en_US' <? if($Client->language == 'en_US') { ?>selected <? } ?>>English</option></select><br/>
   <table border="0">
     <tr>
+      <td><?= _('VAT:') ?></td>
+      <td><input type="text" name="vat" value="<?=$Client->vat?>" style="color: #666; width: 100px; text-align: center;" />%</td>
+   </tr>
+
+    <tr>
       <td><?= _('RCS:') ?></td>
       <td>
 	<input type="text" name="rcs" value="<?= preg_replace('/"/', '\\"', $Client->rcs) ?>" style="color: #666; width: 100px; text-align: center;" />
@@ -55,6 +60,7 @@ global $Client, $User;
 
       </td>
     </tr>
+
     <tr>
       <td><?= _('Capital:') ?></td>
       <td><input type="text" name="capital" value="<?= preg_replace('/"/', '\\"', $Client->capital ) ?>" style="color: #666; width: 100px; text-align: center;" /></td>
