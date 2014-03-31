@@ -220,16 +220,6 @@ function removeSpace($string){
 	return preg_replace( $sPattern, $sReplace, $string );
 }
 
-function getTVA(){
-  $result = mysql_query("SELECT value FROM webfinance_pref WHERE type_pref='taxe_TVA' OR type_pref='taxe_tva' ");
-  list($tva) = mysql_fetch_array($result);
-  if(!is_numeric($tva))
-    $tva=20.0;
-  // Replace commas with dots to work-around stupid locales
-  $tva = preg_replace("/,/", ".", $tva);
-  return $tva;
-}
-
 function getCurrency($id_bank){
   $result = mysql_query("SELECT value FROM webfinance_pref WHERE id_pref=$id_bank")
     or wf_mysqldie();
