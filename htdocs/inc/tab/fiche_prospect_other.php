@@ -35,4 +35,14 @@ global $Client;
   <input type="text" class="tva" name="vat_number" value="<?= $Client->vat_number ?>" class="vat_number" /><br />
   <input type="text" class="siren" name="siren" value="<?= $Client->siren ?>" class="siren" />&nbsp;<?= $Client->link_societe ?><br />
   <b>id_mantis:</b> <input type="text" class="id_mantis" name="id_mantis" value="<?= $Client->id_mantis ?>" class="siren" /><br />
+
+
+ <b><?= _('Login and password:') ?></b><br/>
+  <input type="text" name="login" value="<?= $Client->login ?>" class="person" /><br/>
+  <input type="text" name="password" value="<?= $Client->password ?>" class="keyring" />
+<?php
+   if(!empty($Client->email)){
+     printf('<a href="javascript:confirmSendInfo(%d,\'%s\');"><img src="../imgs/icons/mail-send.png" title="%s" /></a>',$Client->id,_('Send info to client?'),_('Send information'));
+   }
   ?>
+<br/>
