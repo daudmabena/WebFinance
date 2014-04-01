@@ -32,6 +32,17 @@ global $Client, $User;
   <input type="text" name="pays" value="<?= preg_replace('/"/', '\\"', $Client->pays) ?>" style="color: #666; width: 80px; text-align: center;" />Lang: <select name="clt_language"><option value='fr_FR' <? if($Client->language == 'fr_FR') { ?>selected <? } ?>>French</option><option value='en_US' <? if($Client->language == 'en_US') { ?>selected <? } ?>>English</option></select><br/>
   <table border="0">
     <tr>
+      <td>Type</td>
+      <td><select style="font-size: 10px; width: 200px;" name="id_company_type"><?
+  $result = mysql_query("SELECT id_company_type,nom FROM webfinance_company_types ORDER BY nom");
+  while ($t = mysql_fetch_object($result)) {
+    printf('<option value="%s" %s>%s</option>'."\n", $t->id_company_type, ($Client->id_company_type == $t->id_company_type)?"selected":"", ucfirst($t->nom));
+  }
+  ?>
+  </select></td>
+  </tr>
+
+    <tr>
       <td><?= _('VAT:') ?></td>
       <td><input type="text" name="vat" value="<?=$Client->vat?>" style="color: #666; width: 100px; text-align: center;" />%</td>
    </tr>
