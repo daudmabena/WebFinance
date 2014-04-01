@@ -201,7 +201,7 @@ msgid "My company"
 msgstr "Mon entreprise"
 
 msgid "Contacts"
-msgstr "Coordonnées"
+msgstr "Contacts"
 
 msgid "Follow&nbsp;up"
 msgstr "Suivi"
