@@ -135,13 +135,7 @@ global $Client, $User;
 ?>
   <input type="text" name="email[]" class="email" /><br/>
 <input type="text" name="fax" value="<?= $Client->fax ?>" class="fax" />
-<br/>
-  <b><?= _('IBAN:') ?></b><br/>
-<table border="0">
-    <tr><td><?= _('Bank name:') ?></td><td><input type="text" size="10" maxsize="24" name="rib_banque" value="<?= addslashes($Client->rib_banque) ?>" style="color: #666;" /></td></tr>
-    <tr><td><?= _('IBAN:') ?></td><td><input type="text" size="30" maxlength="50" name="iban" value="<?= addslashes($Client->iban) ?>" style="color: #666;" /></td></tr>
-	<tr><td><?= _('BIC:') ?></td><td><input type="text" size="30" maxlength="50" name="bic" value="<?= addslashes($Client->bic) ?>" style="color: #666;" /></td></tr>
-</table>
+
 <br/>
   <?= $Client->link_societe ?>
   </td><td width="100%">
