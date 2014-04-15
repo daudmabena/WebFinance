@@ -278,7 +278,7 @@ while($row_provider = mysql_fetch_assoc($result_provider))
       if(in_array('manager', explode(',', $User->userData->role)))
         echo '<input type="checkbox" name="open_ticket" value="1"> Open ticket <br/>';
       else
-        echo '<input type="hidden" name="open_ticket" value="0"/>';
+        echo '<input type="hidden" name="open_ticket" value="1"/>';
     }
   ?>
     <input type="submit" name="action" value="Save"/>
