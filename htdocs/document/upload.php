@@ -119,11 +119,14 @@ switch(strtolower($file_extension))
 
   case 'pdf':
   case 'odt':
+  case 'doc':
+  case 'ods':
+  case 'xls':
     upload_file($_FILES['file']['tmp_name'], $_FILES['file']['name']);
     break;
 
   default:
-    die("Unknown file extension $file_extension. Only PDF, ZIP and ODT are supported.");
+    die("Unknown file extension $file_extension. Only PDF, ZIP, ODT, ODS, DOC and XLS are supported.");
     break;
 }
 
