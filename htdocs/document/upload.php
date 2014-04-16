@@ -111,16 +111,14 @@ if($_FILES['file']['error'] !== 0)
 
 $file_extension = preg_replace('/.*\./', '', $_FILES['file']['name']);
 
-switch($file_extension)
+switch(strtolower($file_extension))
 {
   case 'zip':
     upload_zip($_FILES['file']['tmp_name']);
     break;
 
   case 'pdf':
-  case 'PDF':
   case 'odt':
-  case 'ODT':
     upload_file($_FILES['file']['tmp_name'], $_FILES['file']['name']);
     break;
 
