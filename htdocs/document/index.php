@@ -47,7 +47,7 @@ require_once("../top.php");
 <form method="POST" action="/document/upload.php" enctype="multipart/form-data">
   <input type="file" name="file" />
   <input type="hidden" name="provider_id" value="<?=$_GET[id]?>" />
-  <input type="submit" name="upload" value="Upload" title="Supported extensions: PDF, ZIP"/>
+  <input type="submit" name="upload" value="Upload" title="Supported extensions: PDF, ZIP, ODT"/>
 </form>
 
 <br/>
